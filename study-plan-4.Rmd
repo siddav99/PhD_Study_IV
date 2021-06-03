@@ -10,11 +10,11 @@ csl: bmcemerg.csl
 
 Introduction
 ============
-Trauma contributes to one-tenth of the global disability-adjusted life-years (DALYs), with low-and middle-income countries (LMICs) bearing a disproportionate burden of the morbidity  [@GBD2019DemographicsCollaborators2020; @Haagsma2019]. This makes it important to understand the long-term outcomes of trauma and the different factors associated with these outcomes, especially in LMICs to address this burden [@Kruithof2017; Wisborg2017; @Rios-Diaz2017]. These long-term outcomes include a range of social and economic factors which shape health-related quality of life (QOL) among trauma patients even after discharge [@Ahmed2017; @Nguyen2017; @Jagnoor2019; @Hossain2020]. 
+Trauma contributes to one-tenth of the global disability-adjusted life-years (DALYs), with low-and middle-income countries (LMICs) bearing a disproportionate burden of the morbidity  [@GBD2019DemographicsCollaborators2020; @Haagsma2019]. To address this burden it is important to understand the long-term outcomes of trauma and the different factors associated with these outcomes, especially in LMICs  [@Kruithof2017; Wisborg2017; @Rios-Diaz2017]. These long-term outcomes include a range of social and economic factors<!-- Using the word factor when talking about outcomes may confuse people. I suggest you use some other word instead --> which shape health-related quality of life (QOL) among trauma patients even after discharge<!-- I thought QOL was one of the long-term outcomes?--> [@Ahmed2017; @Nguyen2017; @Jagnoor2019; @Hossain2020]. 
 
-Age and gender can affect post-discharge QOL outcomes among trauma patients. Limited access to resources, reduced social capital, disparities in support, and restricted education and employment opportunities can influence these outcomes in older populations and women [@Agrawal2014; @Gopinath2017;@Kohler2017; @Waqas2017; @Awang2018; @Quadir2019; @Fabricius2020]. Consequently, age and gender become factors that make trauma patients more vulnerable to poorer post-discharge outcomes [@Mollayeva2018;@Rissanen2020].
+Age and gender can affect<!-- I would say "are associated with", as affect implies causality, which the studies you qoute cannot prove--> post-discharge QOL outcomes<!-- Do you want to refer to several QOL outcomes or just QOL?-->  among trauma patients. Limited access to resources, reduced social capital, disparities in support, and restricted education and employment opportunities<!-- I guess these factors are associated with poorer outcomes regardless of ge and gender, but perhaps they are more common in elderly and females. You need to be more specific in your wording here -->can influence these outcomes in older populations and women [@Agrawal2014; @Gopinath2017;@Kohler2017; @Waqas2017; @Awang2018; @Quadir2019; @Fabricius2020]. Consequently, age and gender become factors that make trauma patients more vulnerable to poorer post-discharge outcomes [@Mollayeva2018;@Rissanen2020]<!-- I guess you mean high age and being a woman?-->.
 
-India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. Understanding the association of can provide insights to improve trauma management and support services in India and other LMIC settings [@Meara2015; @Babhulkar2019]. The aim of this study is to assess the associations between age and gender with post-discharge quality-of-life among adult trauma patients in the context of urban India. 
+India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. Understanding the association of<!-- Of what?--> can provide insights to improve trauma management and support services in India and other LMIC settings [@Meara2015; @Babhulkar2019]. The aim of this study is to assess the associations between age and gender with post-discharge quality-of-life among adult trauma patients in the context of urban India<!-- Although not very important at this stage I think the rationale need more work. In the second paragraph you make clear that females and elderly have worse outcomes after trauma, so what is new in this study? Is it the setting? Is it that you study the interaction between female sex and high age, and that hasn't been done before? I also suggest you add something about the interaction in the aim. --> 
 
 
 
@@ -31,18 +31,19 @@ Setting
 
 <!-- I think it would make more sense to introduce India here-->
 <!-- SD: Since it is a very India -specific study, shouldn't we talk about India in the Introduction?-->
+<!-- MGW: Well, do most studies from the US explain how it is in the US in the introduction? I don't think so. I would say that whether to introduce India in the introduction depends on whether the aim is specific to India or if you think that your study is more general than that. -->
 
-The patients were enrolled from and on-going the Trauma Audit Filter Trial (TAFT) in four participating tertiary-care hospitals in Indian cities. [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
+The patients were enrolled from the on-going Trauma Audit Filters Trial (TAFT) in four participating tertiary-care hospitals in Indian cities. [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
 
 Participants
 ------------
 
-All patients aged 18, which is the legal age for consent in in India [@IndianCouncilofMedicalResearch2006], age above presenting to the casualty department with a history of trauma---as per the V01-Y36, chapter XX of the International Classification of Disease version 10 (ICD-10) [@WordHealthOrganization2016]---who are admitted and discharged alive will be included in the study.
+We include patients aged 18, which is the legal age for consent in in India [@IndianCouncilofMedicalResearch2006],  presenting to the casualty department with a history of trauma---as per the V01-Y36, chapter XX of the International Classification of Disease version 10 (ICD-10) [@WordHealthOrganization2016]--- who are admitted and discharged alive.
 
 Variables
 ---------
 
-Age and gender were the main study variables in this study. We also included vital sign measures such as systolic blood pressure (SBP), respiratory rate (RR), heart rate (HR), oxygen saturation (SPO), Injury severity scores (ISS) and Glasgow Coma Scale (GCS) and injury etiology  measures like mode of transport to hospital, type of injury, mechanism of injury, and length of hospital stay.
+Age and gender were the main study variables in this study. We also included vital sign measures such as systolic blood pressure (SBP), respiratory rate (RR), heart rate (HR), oxygen saturation (SPO), Injury severity scores (ISS) and Glasgow Coma Scale (GCS) and injury etiology measures like mode of transport to hospital, type of injury, mechanism of injury, and length of hospital stay.
 
 Outcomes
 --------
@@ -94,24 +95,24 @@ officers and weekly online review meetings was done to reduce this bias.
 Statistical Methods
 -------------------
 
-Multivariable generalized linear models was used to study the association of age and gender with the QOL [@Carey2013]. Depending on the type of outcomes logistic or multinomial logistic regression was used estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
+Multivariable generalized linear models was used to study the association of age and gender with the QOL [@Carey2013]. Depending on the type of outcomes logistic or multinomial logistic regression was used estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant. The statistical software R was used for all statistical analyses [@RCoreTeam2015].<!-- Specify how you will go about studying the interaction.-->
 
-*Study Size*
-------------
+Study Size
+----------
 
-Simulation studies indicate that as many as 25 events, observations with the outcome, and non-events or more per free parameter are required to obtain stable estimates for logistic regression [@Courvoisier2011]. Given that our logistic regression model included around 25 free parameters, we need to include 625 events and at least as many non-events.
+Simulation studies indicate that as many as 25 events, observations with the outcome, and non-events or more per free parameter are required to obtain stable estimates for logistic regression [@Courvoisier2011]. Given that our logistic regression model included around 25 free parameters, we need to include 625 events and at least as many non-events<!-- So event is an observation with the outcome. Which outcome are you using as the basis of this calculation?-->.
 
-*Ethics*
---------
+Ethics
+------
 
 Ethical clearance for the data collection was obtained from the four participating hospitals as amendments to the existing ethical clearance for the on-going TAFT project (Grant Medical College & Sir J.J., Group
 of Hospitals, Mumbai---No. IEC/Pharm/CT/111/A/2017, Dated 22nd August 2017; Institute of Post-Graduate Medical Education, Kolkata---Memo No. IPGME&R/IEC/2017/396, Dated 21st August 2017; Maulana Azad Medical
 College, New Delhi-F.1/IEC/MAMC/(53/2/2016/No.97), Dated 3rd August 2016; St. John's Medical College, Bengaluru---No. IEC/1/671/2017, Dated 24th August, 2017). Waiver of informed consent was granted for collection of clinical data which was routinely collected for the patients, as they were all admitted after trauma, often arriving in an altered level of consciousness and in severe physical and psychological distress. The amendment granted permission to collect the additional data necessary for this study (Grant  Medical College & Sir J.J., Group of Hospitals, Mumbai---No. IEC/Pharm/CT/2059/2019, Dated 16th September 2019; St. John's Medical College, Bengaluru---No. IEC/1/530/2019, Dated 25th June, 2019).
 
-*Data management*
------------------
+Data management
+---------------
 
-Each center was assigned a center identification number and each patient a locally unique study identification number. Project officers first entered data on paper without any personal identification data. The project officers then transferred this data to an electronic format using a dedicated data entry application. The electronic data did not include any direct identifiers such as name, hospital record number, and telephone numbers. The only way to link an electronic record to a paper intake form was by combining the record's hospital and study identification numbers. Paper forms were kept locally at each center for the duration required by locally applicable laws and regulations, or at least five years, whichever is longest. The adequacy of their storage was the responsibility of the principal investigator at each center. Care was taken taken to ensure that at no time where they stored with less than reasonable care. The center specific data will be owned by each center.
+Each center was assigned a center identification number and each patient a locally unique study identification number. Project officers first entered data on paper without any personal identification data. The project officers then transferred this data to an electronic format using a dedicated data entry application. The electronic data did not include any direct identifiers such as name, hospital record number, and telephone numbers. The only way to link an electronic record to a paper intake form was by combining the record's hospital and study identification numbers. Paper forms were kept locally at each center for the duration required by locally applicable laws and regulations, or at least five years, whichever is longest. The adequacy of their storage was the responsibility of the principal investigator at each center. Care was taken taken to ensure that at no time where they stored with less than reasonable care.
 
 References
 ----------
