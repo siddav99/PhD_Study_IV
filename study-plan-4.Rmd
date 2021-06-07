@@ -10,13 +10,11 @@ csl: bmcemerg.csl
 
 Introduction
 ============
-Trauma contributes to one-tenth of the global disability-adjusted life-years (DALYs), with low-and middle-income countries (LMICs) bearing a disproportionate burden of the morbidity  [@GBD2019DemographicsCollaborators2020; @Haagsma2019]. To address this burden it is important to understand the long-term outcomes of trauma and the different factors associated with these outcomes, especially in LMICs  [@Kruithof2017; Wisborg2017; @Rios-Diaz2017]. These long-term outcomes include a range of social and economic factors<!-- Using the word factor when talking about outcomes may confuse people. I suggest you use some other word instead --> which shape health-related quality of life (QOL) among trauma patients even after discharge<!-- I thought QOL was one of the long-term outcomes?--> [@Ahmed2017; @Nguyen2017; @Jagnoor2019; @Hossain2020]. 
+Trauma contributes to one-tenth of the global disability-adjusted life-years (DALYs), with low-and middle-income countries (LMICs) bearing a disproportionate burden of the morbidity  [@GBD2019DemographicsCollaborators2020; @Haagsma2019]. To address this burden it is important to understand the long-term outcomes of trauma and the different factors associated with these outcomes, especially in LMICs  [@Kruithof2017; @Wisborg2017; @Rios-Diaz2017]. This encompasses a range of socioeconomic outcomes including  health-related quality of life (QOL) [@Ahmed2017; @Nguyen2017; @Hossain2020; @Jagnoor2019]. 
 
-Age and gender can affect<!-- I would say "are associated with", as affect implies causality, which the studies you qoute cannot prove--> post-discharge QOL outcomes<!-- Do you want to refer to several QOL outcomes or just QOL?-->  among trauma patients. Limited access to resources, reduced social capital, disparities in support, and restricted education and employment opportunities<!-- I guess these factors are associated with poorer outcomes regardless of ge and gender, but perhaps they are more common in elderly and females. You need to be more specific in your wording here -->can influence these outcomes in older populations and women [@Agrawal2014; @Gopinath2017;@Kohler2017; @Waqas2017; @Awang2018; @Quadir2019; @Fabricius2020]. Consequently, age and gender become factors that make trauma patients more vulnerable to poorer post-discharge outcomes [@Mollayeva2018;@Rissanen2020]<!-- I guess you mean high age and being a woman?-->.
+Age and gender are associated with post-discharge QOL among trauma patients. Elderly populations and women tend to have limited access to resources, reduced social capital, disparities in support, poor health-seeking behavior, and restricted education and employment opportunities [@Amurwon2019;@Levasseur2015; @Brinda2016; @Gupta2019; @Kennedy2020]. This can shape their post-discharge well-being and outcomes after trauma [@Waqas2017; @Awang2018; @Quadir2019; @Fabricius2020]. Consequently, older age and being a women can make trauma patients more vulnerable to poorer post-discharge QOL [@Gopinath2017;@Brown2017c; @Mollayeva2018;@Rissanen2020]. There is some evidence that older women may have higher morbidity in LMIC settings [@Carmel2019; @Agrawal2014]. There is little research on the interaction between age and gender on QOL among post-discharge trauma patients in this setting. 
 
-India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. Understanding the association of<!-- Of what?--> can provide insights to improve trauma management and support services in India and other LMIC settings [@Meara2015; @Babhulkar2019]. The aim of this study is to assess the associations between age and gender with post-discharge quality-of-life among adult trauma patients in the context of urban India<!-- Although not very important at this stage I think the rationale need more work. In the second paragraph you make clear that females and elderly have worse outcomes after trauma, so what is new in this study? Is it the setting? Is it that you study the interaction between female sex and high age, and that hasn't been done before? I also suggest you add something about the interaction in the aim. --> 
-
-
+Understanding the interaction between age and gender on QOL may provide insights for improving trauma management and developing support services in LMIC settings [@Meara2015; @Babhulkar2019]. The aim of this study is to assess the interaction of age and gender with post-discharge QOL among adult trauma patients using the context of urban India. 
 
 Methods
 =======
@@ -28,26 +26,20 @@ This study is a prospective cohort study of trauma patients discharged from four
 
 Setting
 -------
-
-<!-- I think it would make more sense to introduce India here-->
-<!-- SD: Since it is a very India -specific study, shouldn't we talk about India in the Introduction?-->
-<!-- MGW: Well, do most studies from the US explain how it is in the US in the introduction? I don't think so. I would say that whether to introduce India in the introduction depends on whether the aim is specific to India or if you think that your study is more general than that. -->
-
-The patients were enrolled from the on-going Trauma Audit Filters Trial (TAFT) in four participating tertiary-care hospitals in Indian cities. [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
+India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. The patients were enrolled from the on-going Trauma Audit Filters Trial (TAFT) in four participating tertiary-care hospitals in Indian cities. [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
 
 Participants
 ------------
 
-We include patients aged 18, which is the legal age for consent in in India [@IndianCouncilofMedicalResearch2006],  presenting to the casualty department with a history of trauma---as per the V01-Y36, chapter XX of the International Classification of Disease version 10 (ICD-10) [@WordHealthOrganization2016]--- who are admitted and discharged alive.
+We include patients aged 18, which is the legal age for consent in in India [@IndianCouncilofMedicalResearch2006],  presenting to the casualty department with a history of trauma---as per the V01-Y36, chapter XX of the International Classification of Disease version 10 (ICD-10) [@WordHealthOrganization2016]--who are admitted and discharged alive.
 
 Variables
 ---------
-
-Age and gender were the main study variables in this study. We also included vital sign measures such as systolic blood pressure (SBP), respiratory rate (RR), heart rate (HR), oxygen saturation (SPO), Injury severity scores (ISS) and Glasgow Coma Scale (GCS) and injury etiology measures like mode of transport to hospital, type of injury, mechanism of injury, and length of hospital stay.
+Age and gender were the main  variables for this study. We also included vital sign measures such as systolic blood pressure (SBP), respiratory rate (RR), heart rate (HR), oxygen saturation (SPO), Injury severity scores (ISS) and Glasgow Coma Scale (GCS) and injury etiology measures like mode of transport to hospital, type of injury, mechanism of injury, and length of hospital stay.
 
 Outcomes
 --------
-Health-related quality-of-life outcome was measured using the EQ-5D Tool [@EuroQolGroup]. EQ-5D is a standardized measure of quality of life using five dimensions: mobility, self-care, usual activities, pain/discomfort, and anxiety/depression. Each dimension in the tool has three levels: no problems, some problems, and extreme problems. Additionally there is a visual analog scale (VAS) The patients were followed up at 3-months.
+Health-related quality-of-life outcome was measured using the EQ-5D Tool [@EuroQolGroup]. EQ-5D is a standardized measure of quality of life using five dimensions: mobility, self-care, usual activities, pain/discomfort, and anxiety/depression. Each dimension in the tool has three levels: no problems, some problems, and extreme problems. Additionally there is a visual analog scale (VAS) The patients were followed up at 3-months. EQ-5D tool can be administered over the telephone and has translations available in multiple Indian languages  [@EuroQolGroup]
 
 Table 1: Description of study variables and outcomes
 
@@ -95,12 +87,16 @@ officers and weekly online review meetings was done to reduce this bias.
 Statistical Methods
 -------------------
 
-Multivariable generalized linear models was used to study the association of age and gender with the QOL [@Carey2013]. Depending on the type of outcomes logistic or multinomial logistic regression was used estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant. The statistical software R was used for all statistical analyses [@RCoreTeam2015].<!-- Specify how you will go about studying the interaction.-->
+Multivariable generalized linear models was used to study the association of age and gender with the QOL [@Carey2013]. Multinomial logistic regression was used estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
+<!-- Specify how you will go about studying the interaction.-->
+<!-- SD: Multinomial logistic regression?-->
 
 Study Size
 ----------
 
-Simulation studies indicate that as many as 25 events, observations with the outcome, and non-events or more per free parameter are required to obtain stable estimates for logistic regression [@Courvoisier2011]. Given that our logistic regression model included around 25 free parameters, we need to include 625 events and at least as many non-events<!-- So event is an observation with the outcome. Which outcome are you using as the basis of this calculation?-->.
+Simulation studies indicate that as many as 25 events, observations with the outcome, and non-events or more per free parameter are required to obtain stable estimates for logistic regression [@Courvoisier2011]. Given that our logistic regression model included around 18 free parameters, we need to include 375 events and at least as many non-events.
+<!-- So event is an observation with the outcome. Which outcome are you using as the basis of this calculation?-->
+<!-- SD: Oh, first, I was using the variables (age, gender, etc.). If I am using the outcomes EQ-5D VAS score (low, medium, high based on cut-off scores on the general population?) and the 5 domains with 3 levels each, so its 3 + 15 so 18. 375 events plus 375 non-events. That makes it 750? -->.
 
 Ethics
 ------
