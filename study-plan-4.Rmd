@@ -87,9 +87,7 @@ officers and weekly online review meetings was done to reduce this bias.
 Statistical Methods
 -------------------
 
-Multivariable generalized linear models was used to study the association of age and gender with the QOL [@Carey2013]. Multinomial logistic regression was used estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
-<!-- Specify how you will go about studying the interaction.-->
-<!-- SD: Multinomial logistic regression?-->
+Multivariable linear models was used to study the association of age and gender with the QOL estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant  [@Carey2013]. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
 
 Study Size
 ----------
@@ -110,5 +108,133 @@ Data management
 
 Each center was assigned a center identification number and each patient a locally unique study identification number. Project officers first entered data on paper without any personal identification data. The project officers then transferred this data to an electronic format using a dedicated data entry application. The electronic data did not include any direct identifiers such as name, hospital record number, and telephone numbers. The only way to link an electronic record to a paper intake form was by combining the record's hospital and study identification numbers. Paper forms were kept locally at each center for the duration required by locally applicable laws and regulations, or at least five years, whichever is longest. The adequacy of their storage was the responsibility of the principal investigator at each center. Care was taken taken to ensure that at no time where they stored with less than reasonable care.
 
+Results
+========
+```{r dataset, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+## Required packages
+library(assertthat)
+library(epiDisplay)
+library(dplyr)
+library(knitr)
+library(qwraps2)
+library(tidyverse)
+library(tableone)
+library(bengaltiger)
+library(graphics)
+library(caret)
+library(emmeans)
+
+
+##Source functions
+source("R/import_data.R")
+source("R/clean_data.R")
+source("R/describe_missing_data.R")
+source("R/describe_data.R")
+source("R/finalize_dataset.R")
+source("R/create_sample_characteristics_table.R")
+
+## Import dataset (Using import_data function)
+dirty.data <- import_data("taft-dataset-collated-20200608232208.csv") 
+
+## Clean data (Using clean_data function)
+clean.data <- clean_data(dirty.data)
+
+## Data description
+data.description <- describe_data(clean.data)
+
+## Creating dataset with variables selected for this study
+final.dataset <- finalize_dataset(clean.data)
+
+## Describing missing data (using describe_missing_data)
+descriptions <- describe_missing_data(final.dataset)
+
+
+```
+```{r interaction, include=FALSE, echo=FLASE, message=FALSE, warning=FALSE}
+
+##Creating a model with age and gender
+model1 <- lm(eq5dhs ~ age*sex, data = final.dataset)
+#Interaction term indicated by a * is equivalent to adding the lower order terms to the interaction term
+
+summary(model1)
+##Interaction not significant 
+
+#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
+model2 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset)
+
+summary(model2)
+##Interaction not significant. Interaction coefficient is 0.49 and after adjusting it is 0.40.
+
+##Checking for individual slopes by sex  using the emtrends function
+
+emtrends(model2, ~ sex, var = "age")
+
+##The slopes are not significant for males or females
+
+##Testing difference in slope of male and slope of females using the pairwise argument
+emtrends(model2, pairwise ~ sex, var = "age")
+
+##Interaction of age and gender is not significant. The adjusted interaction factor is 0.40
+
+##Plotting the interaction using the emmip function
+
+##Defining the categories 
+(categories1 <- list(age = seq(17,89, by = 5), sex = c("Female","Male")))
+plot1 <- emmip(model2, sex ~ age,at = categories1, CIs=TRUE)
+
+##saving plot
+jpeg("plot-1.jpeg", quality = 100)
+emmip(model2, sex ~ age,at = categories1, CIs=TRUE)
+dev.off()
+
+##Overall, with older age it is men who tend to have low QOL, while young women have lower QOL than your men. However, the large overlap of confidence interval indicates EQ5D Health status across age is not statistically different for men and women after adjusting. 
+
+
+##Dividing age into categories and comparing interaction over sex
+
+##Making age into categorical
+final.dataset$agegrp <- cut(final.dataset$age, c(17,32,49,89), labels = c("18-32","33-49","50 and above"))
+
+##Making male the reference group and age group 18-32 the reference group as they had the highest QOL
+
+final.dataset$agegrp2 <- relevel(final.dataset$agegrp, ref = "18-32")
+final.dataset$sex2 <- relevel(final.dataset$sex, ref = "Male")
+
+model3 <- lm(eq5dhs ~ sex2*agegrp2, data = final.dataset)
+
+summary(model3)
+
+## Younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-49). Older women and younger women had better QOL scores than younger women. All other groups had lower scores than younger men. 
+
+#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
+model4 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
+
+summary(model4)
+
+##As before above, younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-49) (Estimate -4.86). Older women (Estimate 3.5) had much better QOL scores than younger men, while younger women had marginally better QOL scores than younger men (Estimate 0.5). All other groups had lower scores than younger men. 
+
+
+##Calculating the values of QOL by all possible combinations of the age and sex categories
+ cat.values <- emmeans(model4, ~ sex2*agegrp2)
+
+##Estimating the differences in interactions across age and sex categories interaction using contrast function and argument "revpairwise" as Female is the default in the data set
+
+contrast(cat.values, "revpairwise", by ="agegrp2")
+
+##Age and gender effect is not significant for QOL scores in this data set
+
+##Plotting age categorical interaction
+plot2 <- emmip(model4, sex2 ~ agegrp2, CIs = TRUE)
+
+##Saving plot
+jpeg("plot-2.jpeg", quality = 100)
+emmip(model4, sex2 ~ agegrp2, CIs = TRUE)
+dev.off()
+
+##Middle aged women (33-49) seem to have the lowest QOL Scores.
+
+
+```
 References
 ----------
