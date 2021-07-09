@@ -124,6 +124,7 @@ library(bengaltiger)
 library(graphics)
 library(caret)
 library(emmeans)
+library(car)
 
 
 ##Source functions
@@ -160,34 +161,57 @@ model1 <- lm(eq5dhs ~ age*sex, data = final.dataset)
 summary(model1)
 ##Interaction not significant 
 
+##Calculating the VIF using the car package
+vif(model1)
+
+##It is above 5 for age (7.5) and the interaction factor (8.8)
+
+##Standardizing age and interaction factor by Centering: subtracting by mean and dividing by SD
+final.dataset$centred.age <- (final.dataset$age - mean(final.dataset$age, na.rm = TRUE)) / sd(final.dataset$age, na.rm = TRUE)
+
+##New model using centred age
+cent.model1 <- lm(eq5dhs ~ centred.age*sex, data = final.dataset)
+
+summary(cent.model1)
+##Estimate values do change a bit 
+
+vif(cent.model1)
+##But all the VIFs are less than 5
+
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-model2 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset)
+
+model2 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + centred.age*sex, data = final.dataset)
 
 summary(model2)
-##Interaction not significant. Interaction coefficient is 0.49 and after adjusting it is 0.40.
+##Interaction not significant. Interaction coefficient is -1.13 and after adjusting it is -1.59.
+
+vif(model2)
+##All values below 5
 
 ##Checking for individual slopes by sex  using the emtrends function
 
-emtrends(model2, ~ sex, var = "age")
+emtrends(model2, ~ sex, var = "centred.age")
 
 ##The slopes are not significant for males or females
 
 ##Testing difference in slope of male and slope of females using the pairwise argument
-emtrends(model2, pairwise ~ sex, var = "age")
+emtrends(model2, pairwise ~ sex, var = "centred.age")
 
-##Interaction of age and gender is not significant. The adjusted interaction factor is 0.40
+##Interaction of age and gender is not significant. 
 
 ##Plotting the interaction using the emmip function
 
 ##Defining the categories 
-(categories1 <- list(age = seq(17,89, by = 5), sex = c("Female","Male")))
-plot1 <- emmip(model2, sex ~ age,at = categories1, CIs=TRUE)
+(categories1 <- list(centred.age = seq(-1.32,3.10, by = 0.1), sex = c("Female","Male")))
+plot1 <- emmip(model2, sex ~ centred.age,at = categories1, CIs=TRUE)
 
 ##saving plot
-jpeg("plot-1.jpeg", quality = 100)
-emmip(model2, sex ~ age,at = categories1, CIs=TRUE)
+jpeg("plot-1.Health-Status.jpeg", quality = 100)
+emmip(model2, sex ~ centred.age,at = categories1, CIs=TRUE)
 dev.off()
 
+
+##Age becomes the centered values? (-1, etc)
 ##Overall, with older age it is men who tend to have low QOL, while young women have lower QOL than your men. However, the large overlap of confidence interval indicates EQ5D Health status across age is not statistically different for men and women after adjusting. 
 
 
@@ -205,7 +229,10 @@ model3 <- lm(eq5dhs ~ sex2*agegrp2, data = final.dataset)
 
 summary(model3)
 
-## Younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-49). Older women and younger women had better QOL scores than younger women. All other groups had lower scores than younger men. 
+## Younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-49). Older women and younger women had better QOL scores than younger women. All other groups had lower scores than younger men.
+
+vif(model3)
+##All values are less than 5
 
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
 model4 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
@@ -214,9 +241,11 @@ summary(model4)
 
 ##As before above, younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-49) (Estimate -4.86). Older women (Estimate 3.5) had much better QOL scores than younger men, while younger women had marginally better QOL scores than younger men (Estimate 0.5). All other groups had lower scores than younger men. 
 
+vif(model4)
+##All values are less than 5
 
 ##Calculating the values of QOL by all possible combinations of the age and sex categories
- cat.values <- emmeans(model4, ~ sex2*agegrp2)
+cat.values <- emmeans(model4, ~ sex2*agegrp2)
 
 ##Estimating the differences in interactions across age and sex categories interaction using contrast function and argument "revpairwise" as Female is the default in the data set
 
@@ -228,11 +257,105 @@ contrast(cat.values, "revpairwise", by ="agegrp2")
 plot2 <- emmip(model4, sex2 ~ agegrp2, CIs = TRUE)
 
 ##Saving plot
-jpeg("plot-2.jpeg", quality = 100)
+jpeg("plot-2.Health-Status.jpeg", quality = 100)
 emmip(model4, sex2 ~ agegrp2, CIs = TRUE)
 dev.off()
 
 ##Middle aged women (33-49) seem to have the lowest QOL Scores.
+
+##EQ5D Domains
+## Mobility
+
+##Creating a model with age and gender using the polr function
+m.model1 <- polr(eq5dm ~ age*sex, data = final.dataset)
+
+
+#Interaction term indicated by a * is equivalent to adding the lower order terms to the interaction term
+
+summary(m.model1)
+m.model.ci <- confint.default(m.model1)
+
+##As the estimates are ordered log odds converting them to odds ratios
+exp(cbind(OR = coef(m.model1), m.model.ci))
+
+##For males the odds of having some mobility problems was 1.05 times that of females. For every one year increase in age the odds of some mobility problems increases by 1.019 times (i.e. increases by 1.9%).The interaction factor reduces the odds of having some mobility problems by 1% [(1- 0.99*100)].??
+
+#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
+m.model2 <- polr(eq5dm ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset)
+
+summary(m.model2)
+m.model2.ci <- confint.default(m.model2)
+
+##As the estimates are ordered log odds converting them to odds ratios
+exp(cbind(OR = coef(m.model2), m.model2.ci))
+
+##After adjusting, for males the odds of having some mobility problems was 1.14 times that of females. For every one year increase in age the odds of some mobility problems increases by 1.012 times (i.e. increases by 1.2%).The interaction factor reduces the odds of having some mobility problems by 1% [(1- 0.99*100)].??
+
+##Checking for individual slopes by sex  using the emtrends function
+
+emtrends(m.model2, ~ sex, var = "age")
+
+##The slopes are not significant for males or females
+
+##Testing difference in slope of male and slope of females using the pairwise argument
+emtrends(m.model2, pairwise ~ sex, var = "age")
+
+##Interaction of age and gender is not significant. The adjusted interaction factor is 0.0037
+
+##Plotting the interaction using the emmip function
+
+##Defining the categories 
+(categories1 <- list(age = seq(17,89, by = 5), sex = c("Female","Male")))
+m.plot1 <- emmip(m.model2, sex ~ age,at = categories1, CIs=TRUE)
+
+##saving plot
+jpeg("plot-1.Mobility.jpeg", quality = 100)
+emmip(m.model2, sex ~ age,at = categories1, CIs=TRUE)
+dev.off()
+
+##Male perform poorer than females, except in younger age groups. Is there a reason why the Y-axis is -6, -5, -4? 
+
+##Dividing age into categories and comparing interaction over sex
+m.model3 <- polr(eq5dm ~ sex2*agegrp2, data = final.dataset)
+
+summary(m.model3)
+m.model3.ci <- confint.default(m.model3)
+
+##As the estimates are ordered log odds converting them to odds ratios
+exp(cbind(OR = coef(m.model3), m.model3.ci))
+
+## For younger females (18-32), middle aged females (33-49), older females (50 and above) the odds of having some mobility problems was 1.08, 1.04, and 1.06 times that of younger males (18-32). The odds of middle aged males (33-49) and older males (50 and above) having some mobility problems was 1.51 and 1.47 times than younger males. For every one year increase in age the odds of some mobility problems increases by 1.012 times (i.e. increases by 1.2%).
+
+#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
+m.model4 <- polr(eq5dm ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
+
+summary(m.model4)
+m.model4.ci <- confint.default(m.model4)
+
+##As the estimates are ordered log odds converting them to odds ratios
+exp(cbind(OR = coef(m.model4), m.model4.ci)) 
+
+## After adjusting, for younger females (18-32), middle aged females (33-49), older females (50 and above) the odds of having some mobility problems was 1.05, 1.04, and 1.04 times that of younger males (18-32). The odds of middle aged males (33-49) and older males (50 and above) having some mobility problems was 1.42 and 1.57 times than younger males. For every one year increase in age the odds of some mobility problems increases by 1.012 times (i.e. increases by 1.2%).
+
+
+##Calculating the values of mobility by all possible combinations of the age and sex categories
+ m.cat.values <- emmeans(m.model4, ~ sex2*agegrp2, type = "response")
+
+##Estimating the differences in interactions across age and sex categories interaction using pairs function as these are logs of odds
+
+pairs(m.cat.values, reverse = TRUE)
+
+##Age and gender effect is not significant for QOL scores in this data set
+
+##Plotting age categorical interaction
+m.plot2 <- emmip(m.model4, sex2 ~ agegrp2, CIs = TRUE)
+
+
+##Saving plot
+jpeg("plot-2.Mobility.jpeg", quality = 100)
+emmip(m.model4, sex2 ~ agegrp2, CIs = TRUE)
+dev.off()
+
 
 
 ```

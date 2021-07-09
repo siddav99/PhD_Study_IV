@@ -27,7 +27,12 @@ finalize_dataset <- function(data) {
                                      spo2,
                                      gcs,
                                      s30d,
-                                     eq5dhs)
+                                     eq5dhs,
+                                     eq5dm,
+                                     eq5dsc,
+                                     eq5dua,
+                                     eq5dpd,
+                                     eq5dad)
     
     ## Return clean data
     return (final.dataset)

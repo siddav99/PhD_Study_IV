@@ -251,6 +251,52 @@ clean_data <- function(dirty.data) {
     eq5dhs <- dplyr::na_if(eq5dhs,999)
     eq5dhs <- dplyr::na_if(eq5dhs,-1)
     clean.data$eq5dhs <- eq5dhs
+    
+    ## EQ5D Mobility
+    eq5dm <- as.numeric(dirty.data$eq5dm)
+    summary(eq5dm)
+    eq5dm <- dplyr::na_if(eq5dm,999)
+    eq5dm <- dplyr::na_if(eq5dm,99)
+    eq5dm <- dplyr::na_if(eq5dm,-1)
+    eq5dm <- factor(eq5dm, levels = c(0,1,2), labels = c("No Problems", "Some Problems", "Confined to bed"))
+    clean.data$eq5dm <- eq5dm
+    eq5dm.summary <- table(clean.data$eq5dm)
+    
+    ## EQ5D Selfcare
+    eq5dsc <- as.numeric(dirty.data$eq5dsc)
+    summary(eq5dsc)
+    eq5dsc <- dplyr::na_if(eq5dsc,999)
+    eq5dsc <- dplyr::na_if(eq5dsc,99)
+    eq5dsc <- dplyr::na_if(eq5dsc,-1)
+    
+    clean.data$eq5dsc <- eq5dsc
+    
+    ## EQ5D Usual Activities
+    eq5dua <- as.numeric(dirty.data$eq5dua)
+    summary(eq5dua)
+    eq5dua <- dplyr::na_if(eq5dua,999)
+    eq5dua <- dplyr::na_if(eq5dua,99)
+    eq5dua <- dplyr::na_if(eq5dua,-1)
+    
+    clean.data$eq5dua <- eq5dua
+    
+    ## EQ5D Pain
+    eq5dpd <- as.numeric(dirty.data$eq5dpd)
+    summary(eq5dpd)
+    eq5dpd <- dplyr::na_if(eq5dpd,999)
+    eq5dpd <- dplyr::na_if(eq5dpd,99)
+    eq5dpd <- dplyr::na_if(eq5dpd,-1)
+    
+    clean.data$eq5dpd <- eq5dpd
+    
+    ## EQ5D Anxiety
+    eq5dad <- as.numeric(dirty.data$eq5dad)
+    summary(eq5dad)
+    eq5dad <- dplyr::na_if(eq5dad,999)
+    eq5dad <- dplyr::na_if(eq5dad,99)
+    eq5dad <- dplyr::na_if(eq5dad,-1)
+    
+    clean.data$eq5dad <- eq5dad
 
     ## Finally, return clean data
     return (clean.data)
