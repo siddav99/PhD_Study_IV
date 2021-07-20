@@ -271,7 +271,6 @@ m.model1 <- polr(eq5dm ~ age*sex, data = final.dataset)
 
 
 #Interaction term indicated by a * is equivalent to adding the lower order terms to the interaction term
-
 summary(m.model1)
 m.model.ci <- confint.default(m.model1)
 
@@ -336,7 +335,6 @@ m.model4.ci <- confint.default(m.model4)
 exp(cbind(OR = coef(m.model4), m.model4.ci)) 
 
 ## After adjusting, for younger females (18-32), middle aged females (33-49), older females (50 and above) the odds of having some mobility problems was 1.05, 1.04, and 1.04 times that of younger males (18-32). The odds of middle aged males (33-49) and older males (50 and above) having some mobility problems was 1.42 and 1.57 times than younger males. For every one year increase in age the odds of some mobility problems increases by 1.012 times (i.e. increases by 1.2%).
-
 
 ##Calculating the values of mobility by all possible combinations of the age and sex categories
  m.cat.values <- emmeans(m.model4, ~ sex2*agegrp2, type = "response")
