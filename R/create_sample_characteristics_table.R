@@ -44,7 +44,7 @@ create_sample_characteristics_table <- function(data) {
                                   abbreviated.label = ""),
                      eq5dm = list(full.label = "EQ5D Mobility",
                                    abbreviated.label = ""),
-                     eq5dhs = list(full.label = "EQ5D Self Care",
+                     eq5dsc = list(full.label = "EQ5D Self Care",
                                    abbreviated.label = ""),
                      eq5dua = list(full.label = "EQ5D Usual Activities",
                                   abbreviated.label = ""),
@@ -53,9 +53,7 @@ create_sample_characteristics_table <- function(data) {
                      eq5dad = list(full.label = "EQ5D Anxiety/Depression",
                                   abbreviated.label = ""),
                      s30d = list(full.label = "30 day mortality",
-                                 abbreviated.label = ""),
-                     .complete = list(full.label = "Complete",
-                                      abbreviated.label = ""))
+                                 abbreviated.label = ""))
 
     codebook.options <- list(full.label.entry = "full.label",
                              abbreviated.label.entry = "abbreviated.label")
