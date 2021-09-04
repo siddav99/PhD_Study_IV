@@ -24,7 +24,7 @@ Methods
 Study Design
 ------------
 
-This study is a prospective cohort study of trauma patients discharged from four tertiary-care hospital in urban India between November 2019 and October 2021.
+This study is a cross-sectional study of a prospective cohort study of trauma patients discharged from four tertiary-care hospital in urban India between November 2019 and May 2021.
 
 Setting
 -------
@@ -185,13 +185,23 @@ hs.complete <- NROW(final.dataset$eq5dhs) - descriptions[["eq5dhs"]][["n"]]
 ##Mean HS score
 hs.mean <- mean(final.dataset$eq5dhs, na.rm = T)
 
-##Proportion with No problems in domains
-final.dataset$eq5dm
+##EQ5D Score by gender
+eq5dhs.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female"], na.rm = T)
 
-BCI_percent <- BCI / rowSums(BCI) * 100
+#l.model <- lm(eq5dhs ~ 1, final.dataset)
+#confint(l.model, level=0.95)
+
+eq5dhs.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male"], na.rm = T)
 
 
+##EQ5D Score by Age
+eq5dhs.young.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp2=="18-32"], na.rm = T)
+eq5dhs.middle.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp2=="33-49"], na.rm = T)
+eq5dhs.old.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp2=="50 and above"], na.rm = T)
 
+eq5dhs.young.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp2=="18-32"], na.rm = T)
+eq5dhs.middle.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp2=="33-49"], na.rm = T)
+eq5dhs.old.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp2=="50 and above"], na.rm = T)
 
 ##Creating a model with age and gender
 model1 <- lm(eq5dhs ~ age*sex, data = final.dataset)
@@ -275,6 +285,11 @@ model4 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + s
 
 summary(model4)
 
+##Calculating CI
+model4.ci <- confint.default(model4)
+hs <- cbind(coef(model4), model4.ci)
+
+
 ##As before above, younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-49) (Estimate -4.86). Older women (Estimate 3.5) had much better QOL scores than younger men, while younger women had marginally better QOL scores than younger men (Estimate 0.5). All other groups had lower scores than younger men. 
 
 vif(model4)
@@ -320,8 +335,6 @@ m.model2 <- polr(eq5dm ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr 
 
 summary(m.model2)
 m.model2.ci <- confint.default(m.model2)
-
-
 
 ##As the estimates are ordered log odds converting them to odds ratios
 exp(cbind(OR = coef(m.model2), m.model2.ci))
@@ -381,7 +394,13 @@ exp(cbind(OR = coef(m.model3), m.model3.ci))
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
 m.model4 <- polr(eq5dm ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
 
-summary(m.model4)
+m.coef <- coef(summary(m.model4))
+
+##p value
+m.p <- pnorm(abs(m.coef[, "t value"]), lower.tail = FALSE) * 2
+m.p.val <- (m.coef <- cbind(m.coef, "p value" = m.p))
+
+##OR
 m.model4.ci <- confint.default(m.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
@@ -487,6 +506,14 @@ exp(cbind(OR = coef(sc.model3), sc.model3.ci))
 sc.model4 <- polr(eq5dsc ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
 
 summary(sc.model4)
+sc.coef <- coef(summary(sc.model4))
+
+##p value
+sc.p <- pnorm(abs(sc.coef[, "t value"]), lower.tail = FALSE) * 2
+sc.p.val <- (sc.coef <- cbind(sc.coef, "p value" = sc.p))
+
+##OR
+
 sc.model4.ci <- confint.default(sc.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
@@ -578,6 +605,14 @@ exp(cbind(OR = coef(ua.model3), ua.model3.ci))
 ua.model4 <- polr(eq5dua ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
 
 summary(ua.model4)
+ua.coef <- coef(summary(ua.model4))
+
+##p value
+ua.p <- pnorm(abs(ua.coef[, "t value"]), lower.tail = FALSE) * 2
+ua.p.val <- (ua.coef <- cbind(ua.coef, "p value" = ua.p))
+
+##OR
+
 ua.model4.ci <- confint.default(ua.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
@@ -668,6 +703,14 @@ exp(cbind(OR = coef(pd.model3), pd.model3.ci))
 pd.model4 <- polr(eq5dpd ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
 
 summary(pd.model4)
+
+pd.coef <- coef(summary(pd.model4))
+
+##p value
+pd.p <- pnorm(abs(pd.coef[, "t value"]), lower.tail = FALSE) * 2
+pd.p.val <- (pd.coef <- cbind(pd.coef, "p value" = pd.p))
+
+##OR
 pd.model4.ci <- confint.default(pd.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
@@ -747,6 +790,14 @@ dev.off()
 ad.model3 <- polr(eq5dad ~ sex2*agegrp2, data = final.dataset)
 
 summary(ad.model3)
+
+ad.coef <- coef(summary(ad.model4))
+
+##p value
+ad.p <- pnorm(abs(ad.coef[, "t value"]), lower.tail = FALSE) * 2
+ad.p.val <- (ad.coef <- cbind(ad.coef, "p value" = ad.p))
+
+##OR
 ad.model3.ci <- confint.default(ad.model3)
 
 ##As the estimates are ordered log odds converting them to odds ratios
@@ -768,7 +819,16 @@ summary(ad.model4)
 ad.model4.ci <- confint.default(ad.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
-exp(cbind(OR = coef(ad.model4), ad.model4.ci)) 
+ad.odds <- exp(cbind(OR = coef(ad.model4), ad.model4.ci)) 
+
+
+##OR
+ad.young.fem <- ad.odds["sex2Female", "OR"]
+ad.middle.fem <- ad.odds["sex2Female:agegrp233-49", "OR"]
+ad.old.fem <- ad.odds["sex2Female:agegrp250 and above", "OR"]
+ad.middle.mal <- ad.odds["agegrp233-49", "OR"]
+ad.old.mal <- ad.odds["agegrp250 and above", "OR"]
+
 
 ## After adjusting, for younger females (18-32), middle aged females (33-49), older females (50 and above) the odds of having any anxiety and depression was 1.39, 0.48, and 1.10 times that of younger males (18-32). The odds of middle aged males (33-49) and older males (50 and above) some anxiety and depression was 1.59 and 0.84 times than younger males. Only Older males and middle aged females had lower  odds of having any form of anxiety and depression than younger males.
 
@@ -793,24 +853,44 @@ Out of a total of `r dataset$total.patients` trauma patients enrolled, `r datase
 
 EQ-5D Scores
 ------------
-`r interaction$hs.complete` completed the EQ-5D questionnaire at 3 months after discharge. The median index score was 80.0 [IQR: 65.0-90.0]. Three months after discharge, just over half the patients (54.8%) reported no problems with mobility while two-thirds reported no problems with self-care. While less than half the patients (43.0%) could carry on usual activities without any problems and only one-third of the patients (34.7%) reported no pain or discomfort after three-months of post-discharge. Around 40% of the patients reported experiencing some form of anxiety or depression. The overall EQ-5D scores are provided in Table 3.
+`r interaction$hs.complete` completed the EQ-5D questionnaire at 3 months after discharge. The mean EQ5D index score was 76 (SD = 20.5). Three months after discharge, young males (18-32 years) had the highest score while middle-aged females reported the lowest score. Just over half the patients (54.8%) reported no problems with mobility while two-thirds reported no problems with self-care. While less than half the patients (43.0%) could carry on usual activities without any problems and only one-third of the patients (34.7%) reported no pain or discomfort after three-months of post-discharge. Around 40% of the patients reported experiencing some form of anxiety or depression. Again, the proportion of young males reporting any problems across all the five domains was the lowest while the proportion  middle-aged females reported experiencing the problems across all the five domains was the highest. The overall EQ-5D scores are provided in Table 3.
 
 EQ-5D in relation to gender and age
 -------------------------------
-Comparing EQ5D index scores across males and females across age groups, after adjusting for injury etiology, vitals, and severity, indicate that young males aged (aged 18-32) had significantly higher scores (p = 0.02) than the middle aged (aged 33-49) males. Only old females (aged 50 and above) had higher scores than young males All other groups had lower scores than young males (Table 4).
+Overall females had a slightly higher mean EQ5D index score (`r interaction$eq5dhs.fem`) than males (`r interaction$eq5dhs.mal`). On running a linear regression of index scores across sex across age after adjusting for injury etiology, vitals, and severity, young males aged (aged 18-32) performed better than middle-aged (aged 33-49)  and old  (aged 50 and above) males. On the other hand, old females had higher scores than young and middle aged females. Middle-age group had the lowest performance, with middle-aged faring the worst (Fig 1).
 
-In the mobility dimension, keeping young males as the reference group, the adjusted odds of having mobility problems was `r interaction$m.young.fem` in young females (aged 18-32), `r interaction$m.middle.fem` middle aged females (aged 33-49), and `r interaction$m.old.fem` old females (aged 50 and above). In middle aged males (aged 33-49) the odds was `r interaction$m.middle.mal` and in old males (aged 50 and above) the odds was `r interaction$m.old.mal`. Thus, all groups had higher odds of having some mobility problems than young males.
+Regression analysis in the mobility dimension keeping young males as the reference group, shows that the adjusted odds of reporting mobility problems was `r interaction$m.young.fem` in young females (aged 18-32), `r interaction$m.middle.fem` middle-aged females (aged 33-49), and `r interaction$m.old.fem` old females (aged 50 and above). In middle-aged males (aged 33-49) the odds were `r interaction$m.middle.mal` and in old males (aged 50 and above) the odds were `r interaction$m.old.mal`. Thus, all groups had higher odds of reporting some mobility problems than young males. 
 
-Assessing the self-care dimension, the adjusted odds of having problems performing self-care tasks was `r interaction$sc.young.fem` in young females, `r interaction$sc.middle.fem` in middle aged females, and `r interaction$sc.old.fem` old females compared to young males. On the other hand, the odds of having these problems in middle aged males was `r interaction$sc.middle.mal` and in old males it was `r interaction$sc.old.mal`times than young males. Only old females had lower odds of reporting problems with self-care than young males.
+Assessing the regression analysis in the self-care dimension, showed the adjusted odds of reporting problems performing self-care tasks was `r interaction$sc.young.fem` in young females, `r interaction$sc.middle.fem` in middle-aged females, and `r interaction$sc.old.fem` old females compared to young males. On the other hand, the odds of reporting these problems in middle-aged males was `r interaction$sc.middle.mal` and in old males it was `r interaction$sc.old.mal`times than young males. Only old females had lower odds of reporting problems with self-care than young males.
 
-In the dimension of being able to perform usual activities, the adjusted odds of having problems performing was `r interaction$ua.young.fem` in young females, `r interaction$ua.middle.fem` in middle aged females, and `r interaction$ua.old.fem` old females with respect to young males. The odds of having these problems was `r interaction$sc.middle.mal` in middle aged males and  `r interaction$sc.old.mal` times in in old males. Thus, middle aged and old females had lower odds of having problems performing usual activities than young males.
+In the dimension of being able to perform usual activities, regression analysis indicated that the adjusted odds of reporting any problems in performing was `r interaction$ua.young.fem` in young females, `r interaction$ua.middle.fem` in middle aged females, and `r interaction$ua.old.fem` old females with respect to young males. The odds of reporting these problems were `r interaction$sc.middle.mal` in middle aged males and  `r interaction$sc.old.mal` times in in old males. Thus, middle-aged and old females had lower odds of having problems performing usual activities than young males.
 
-The adjusted odds of having any form of pain and discomfort was `r interaction$pd.young.fem` in young females, `r interaction$pd.middle.fem` in middle aged females, and `r interaction$pd.old.fem` old females compared to young males. Among middle aged and old males these odds were `r interaction$pd.middle.mal` and  `r interaction$pd.old.mal` respectively. Thus, middle aged and old females had lower odds of having problems performing usual activities than young males. So, middle aged and older males had lower odds of having any form of pain or discomfort than young males. Females across all ages had higher odds of reporting pain and discomfort. 
+The adjusted odds of reporting any form of pain and discomfort were `r interaction$pd.young.fem` in young females, `r interaction$pd.middle.fem` in middle-aged females, and `r interaction$pd.old.fem` old females compared to young males. Among middle aged and old males these odds were `r interaction$pd.middle.mal` and  `r interaction$pd.old.mal` respectively. Thus, middle aged and old females had lower odds of reporting pain than young males. 
 
-In the anxiety and depression dimension, keeping young males as the reference group, the adjusted odds of reporting any form of anxiety or depression was `r interaction$ad.young.fem` in young females, `r interaction$ad.middle.fem` middle aged females, and `r interaction$ad.old.fem` old females. In middle aged males the odds was `r interaction$ad.middle.mal` and in old males the odds was `r interaction$ad.old.mal`. Thus, all groups had higher odds of having some mobility problems than young males. So, Old males and middle aged females had lower odds of reporting having any form of anxiety and depression than young males.
+In the anxiety and depression dimension, keeping young males as the reference group, the adjusted odds of reporting any form of anxiety or depression were `r interaction$ad.young.fem` in young females, `r interaction$ad.middle.fem` middle-aged females, and `r interaction$ad.old.fem` old females. In middle-aged males the odds was `r interaction$ad.middle.mal` and in old males the odds was `r interaction$ad.old.mal`. So, younger and middle-aged females had lower odds of reporting having any form of anxiety and depression than young males. 
+
+Though most of the odds of reporting any problems across the EQ5D domains were not statistically significant, middle aged males reported significant problems with pain and usual activity while old males reported significant problems with pain and anxiety (Table 4). The interaction of age and gender on the index EQ5D score and across its 5 domains was found to be not statistically significant.  
 
 Discussion
 ==========
+This study examined the interaction of age and gender on QOL in trauma patients discharged from four tertiary-care hospital in urban India at 3-months after discharge. We did not find statistically significant differences across all age groups and gender as well as no interaction effect between age and gender in this population. The sub-group analysis showed differences in QOL between these groups. In each of the five EQ5D domains, odds of reporting problems varied between the groups. We found middle aged men report significantly lower QOL scores and was due to having higher odds of reporting problems in mobility, anxiety or depression, and especially pain, and usual activities. 
+
+The mean EQ5D index score of 76 of trauma patients in this study is lower than the general population norm for South Asia of 85 [@Kularatna2014]. This indicates that even after 3-months since discharge, trauma patients in urban India had not yet reached the pre-injury norm of QOL for the region. More services to address their needs.
+
+In this study middle-aged cohort, especially women, seem to be having the odds for the poorest QOL outcomes. 
+
+Pain and discomfort was the domain that reported the highest proportion of reporting problems followed by usual activities.
+
+However, middle-aged and older women had the lowest odds of reporting problems in pain and usual activities than other groups. Could be due to the social structure where men and younger women going to formal employment, which is deemed in higher value than domestic chores, that women engage in. Pain reporting tends to be lower in women again due social factors. Similarly women reported lowest odds of anxiety and depression again could be due to social factors 
+
+Young men had highest odds of reporting problems with mobility than other groups could be due to the group having more access to move/travel than other age groups.
+
+<!--Just wondering why having a higher proportion of those reporting any problem does not translate to higher odds of having that problem. For e.g.Middle-aged women report the highest proportion of any pain but have the lowest odds of reporting any pain than young men.--!>
+
+
+
+
+
 
 
 
