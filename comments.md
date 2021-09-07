@@ -11,3 +11,4 @@ SD: Sure, done that.
 
 - Please add discussion and compile as pdf.
 
+- Elaborate on the statistical methods. For example, add exactly how you specified the interaction. 

@@ -14,7 +14,9 @@ Introduction
 ============
 Trauma contributes to one-tenth of the global disability-adjusted life-years (DALYs), with low-and middle-income countries (LMICs) bearing a disproportionate burden of the morbidity  [@GBD2019DemographicsCollaborators2020; @Haagsma2019]. To address this burden it is important to understand the long-term outcomes of trauma and the different factors associated with these outcomes, especially in LMICs  [@Kruithof2017; @Wisborg2017; @Rios-Diaz2017]. This encompasses a range of socioeconomic outcomes including  health-related quality of life (QOL) [@Ahmed2017; @Nguyen2017; @Hossain2020; @Jagnoor2019]. 
 
-Age and gender are associated with post-discharge QOL among trauma patients. Elderly populations and women tend to have limited access to resources, reduced social capital, disparities in support, poor health-seeking behavior, and restricted education and employment opportunities [@Amurwon2019;@Levasseur2015; @Brinda2016; @Gupta2019; @Kennedy2020]. This can shape their post-discharge well-being and outcomes after trauma [@Waqas2017; @Awang2018; @Quadir2019; @Fabricius2020]. Consequently, older age and being a women can make trauma patients more vulnerable to poorer post-discharge QOL [@Gopinath2017;@Brown2017c; @Mollayeva2018;@Rissanen2020]. There is some evidence that older women may have higher morbidity in LMIC settings [@Carmel2019; @Agrawal2014]. There is little research on the interaction between age and gender on QOL among post-discharge trauma patients in this setting. 
+Age and gender are associated with post-discharge QOL among trauma patients. Elderly populations and women tend to have limited access to resources, reduced social capital, disparities in support, poor health-seeking behavior, and restricted education and employment opportunities [@Amurwon2019;@Levasseur2015; @Brinda2016; @Gupta2019; @Kennedy2020]. This can shape their post-discharge well-being and outcomes after trauma [@Waqas2017; @Awang2018; @Quadir2019; @Fabricius2020]. 
+
+Consequently, older age and being a women can make trauma patients more vulnerable to poorer post-discharge QOL [@Gopinath2017;@Brown2017c; @Mollayeva2018;@Rissanen2020]. There is some evidence that older women may have higher morbidity in LMIC settings [@Carmel2019; @Agrawal2014], but there is little research on the interaction between age and gender on QOL among post-discharge trauma patients in this setting. 
 
 Understanding the interaction between age and gender on QOL may provide insights for improving trauma management and developing support services in LMIC settings [@Meara2015; @Babhulkar2019]. The aim of this study is to assess the interaction of age and gender with post-discharge QOL among adult trauma patients using the context of urban India. 
 
@@ -24,11 +26,11 @@ Methods
 Study Design
 ------------
 
-This study is a cross-sectional study of a prospective cohort study of trauma patients discharged from four tertiary-care hospital in urban India between November 2019 and May 2021.
+This study is a cross-sectional study using data from an ongoing interrupted time series trial of trauma patients discharged from four tertiary-care hospital in urban India between November 2019 and May 2021.
 
 Setting
 -------
-India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. The patients were enrolled from the on-going Trauma Audit Filters Trial (TAFT) in four participating tertiary-care hospitals in Indian cities. [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
+India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. The patients were enrolled from the on-going Trauma Audit Filters Trial (TAFT) in four participating tertiary-care hospitals in Indian cities [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
 
 Participants
 ------------
@@ -83,8 +85,7 @@ Data was collected by one dedicated independent project officer in each of the h
 Bias
 ----
 
-There could be bias in collection of data and recording of vital signs used to calculate injury severity. Adequate training of the project officers, periodic quality control of the data with external project
-officers and weekly online review meetings was done to reduce this bias.
+There could be bias in collection of data and recording of vital signs used to calculate injury severity. Adequate training of the project officers, periodic quality control of the data with external project officers and weekly online review meetings was done to reduce this bias.
 
 Statistical Methods
 -------------------
@@ -97,13 +98,12 @@ Study Size
 Simulation studies indicate that as many as 25 events, observations with the outcome, and non-events or more per free parameter are required to obtain stable estimates for logistic regression [@Courvoisier2011]. Given that our logistic regression model included around 18 free parameters, we need to include 375 events and at least as many non-events.
 <!-- So event is an observation with the outcome. Which outcome are you using as the basis of this calculation?-->
 <!-- SD: Oh, first, I was using the variables (age, gender, etc.). If I am using the outcomes EQ-5D VAS score (low, medium, high based on cut-off scores on the general population?) and the 5 domains with 3 levels each, so its 3 + 15 so 18. 375 events plus 375 non-events. That makes it 750? -->.
+<!-- Well, so I haven't worked much with ordinal outcomes, so you will have to read up on that. I'm more used to the binary outcome setting, in which the definition of an event is much more straightforward. But here's a paper on sample size with multinominal logistic regression that may help https://pubmed.ncbi.nlm.nih.gov/30614028/ -->
 
 Ethics
 ------
 
-Ethical clearance for the data collection was obtained from the four participating hospitals as amendments to the existing ethical clearance for the on-going TAFT project (Grant Medical College & Sir J.J., Group
-of Hospitals, Mumbai---No. IEC/Pharm/CT/111/A/2017, Dated 22nd August 2017; Institute of Post-Graduate Medical Education, Kolkata---Memo No. IPGME&R/IEC/2017/396, Dated 21st August 2017; Maulana Azad Medical
-College, New Delhi-F.1/IEC/MAMC/(53/2/2016/No.97), Dated 3rd August 2016; St. John's Medical College, Bengaluru---No. IEC/1/671/2017, Dated 24th August, 2017). Waiver of informed consent was granted for collection of clinical data which was routinely collected for the patients, as they were all admitted after trauma, often arriving in an altered level of consciousness and in severe physical and psychological distress. The amendment granted permission to collect the additional data necessary for this study (Grant  Medical College & Sir J.J., Group of Hospitals, Mumbai---No. IEC/Pharm/CT/2059/2019, Dated 16th September 2019; St. John's Medical College, Bengaluru---No. IEC/1/530/2019, Dated 25th June, 2019).
+Ethical clearance for the data collection was obtained from the four participating hospitals as amendments to the existing ethical clearance for the on-going TAFT project (Grant Medical College & Sir J.J., Group of Hospitals, Mumbai---No. IEC/Pharm/CT/111/A/2017, Dated 22nd August 2017; Institute of Post-Graduate Medical Education, Kolkata---Memo No. IPGME&R/IEC/2017/396, Dated 21st August 2017; Maulana Azad Medical College, New Delhi-F.1/IEC/MAMC/(53/2/2016/No.97), Dated 3rd August 2016; St. John's Medical College, Bengaluru---No. IEC/1/671/2017, Dated 24th August, 2017). Waiver of informed consent was granted for collection of clinical data which was routinely collected for the patients, as they were all admitted after trauma, often arriving in an altered level of consciousness and in severe physical and psychological distress. The amendment granted permission to collect the additional data necessary for this study (Grant  Medical College & Sir J.J., Group of Hospitals, Mumbai---No. IEC/Pharm/CT/2059/2019, Dated 16th September 2019; St. John's Medical College, Bengaluru---No. IEC/1/530/2019, Dated 25th June, 2019).
 
 Data management
 ---------------
@@ -873,7 +873,7 @@ Though most of the odds of reporting any problems across the EQ5D domains were n
 
 Discussion
 ==========
-This study examined the interaction of age and gender on QOL in trauma patients discharged from four tertiary-care hospital in urban India at 3-months after discharge. We did not find statistically significant differences across all age groups and gender as well as no interaction effect between age and gender in this population. The sub-group analysis showed differences in QOL between these groups. In each of the five EQ5D domains, odds of reporting problems varied between the groups. We found middle aged men report significantly lower QOL scores and was due to having higher odds of reporting problems in mobility, anxiety or depression, and especially pain, and usual activities. 
+This study examined the interaction of age and gender on QOL in trauma patients discharged from four tertiary-care hospital in urban India at 3-months after discharge. We did not find statistically significant differences across all age groups and gender as well as no interaction effect between age and gender in this population. The sub-group analysis showed differences in QOL between these groups<!-- What groups are these?-->. In each of the five EQ5D domains, odds of reporting problems varied between the groups. We found middle aged men report significantly lower QOL scores and was due to having higher odds of reporting problems in mobility, anxiety or depression, and especially pain, and usual activities. 
 
 The mean EQ5D index score of 76 of trauma patients in this study is lower than the general population norm for South Asia of 85 [@Kularatna2014]. This indicates that even after 3-months since discharge, trauma patients in urban India had not yet reached the pre-injury norm of QOL for the region. More services to address their needs.
 
@@ -886,6 +886,7 @@ However, middle-aged and older women had the lowest odds of reporting problems i
 Young men had highest odds of reporting problems with mobility than other groups could be due to the group having more access to move/travel than other age groups.
 
 <!--Just wondering why having a higher proportion of those reporting any problem does not translate to higher odds of having that problem. For e.g.Middle-aged women report the highest proportion of any pain but have the lowest odds of reporting any pain than young men.--!>
+<!-- Are the odds adjusted for other factors? -->
 
 
 
