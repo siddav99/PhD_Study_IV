@@ -7,3 +7,8 @@ SD: Just to get an overview in a single view
 - Overall this looks very good. At some point you will need to start storing the results you want to display in text in some object or list or whatever, so that you can retrieve them using code. For example, you might want to store the odds ratios from `m.model3` in `m.model3.or` or similar. 
 SD: Sure, done that.
 
+- Please use inline code to get figures, instead of hard coding them, for example `80.0 [IQR: 65.0-90.0]`.
+
+- Please add discussion and compile as pdf.
+
+- Elaborate on the statistical methods. For example, add exactly how you specified the interaction. 
