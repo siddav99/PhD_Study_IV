@@ -10,5 +10,9 @@ SD: Sure, done that.
 - Please use inline code to get figures, instead of hard coding them, for example `80.0 [IQR: 65.0-90.0]`.
 
 - Please add discussion and compile as pdf.
+SD: Tried many option, pandoc is created but gets stuck with error 1 for some reason. When you run the codes, do you get the same?
 
 - Elaborate on the statistical methods. For example, add exactly how you specified the interaction. 
+SD: I have added this
+
+SD: I had sent a comment on Slack about, OR for the EQ5D domains (logistic regression) with binomial outcome "Any Problem" and "No Problem". Which is the reference group, is it "Any Problem" as it comes first  alphabetically? Therefore, the OR would be odds of having no problems rather than odds of having any problem. Is that right?

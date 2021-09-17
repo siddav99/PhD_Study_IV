@@ -1,0 +1,483 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Interaction of age and gender on post-discharge quality-of-life in adult trauma patients in urban India -- a cohort study},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Interaction of age and gender on post-discharge quality-of-life
+in adult trauma patients in urban India -- a cohort study}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Trauma contributes to one-tenth of the global disability-adjusted
+life-years (DALYs), with low-and middle-income countries (LMICs) bearing
+a disproportionate burden of the morbidity
+{[}@GBD2019DemographicsCollaborators2020; @Haagsma2019{]}. To address
+this burden it is important to understand the long-term outcomes of
+trauma and the different factors associated with these outcomes,
+especially in LMICs {[}@Kruithof2017; @Wisborg2017; @Rios-Diaz2017{]}.
+This encompasses a range of socioeconomic outcomes including
+health-related quality of life (QOL) {[}@Ahmed2017; @Nguyen2017;
+@Hossain2020; @Jagnoor2019{]}.
+
+Age and gender are associated with post-discharge QOL among trauma
+patients. Elderly populations and women tend to have limited access to
+resources, reduced social capital, disparities in support, poor
+health-seeking behavior, and restricted education and employment
+opportunities {[}@Amurwon2019;@Levasseur2015; @Brinda2016; @Gupta2019;
+@Kennedy2020{]}. This can shape their post-discharge well-being and
+outcomes after trauma {[}@Waqas2017; @Awang2018; @Quadir2019;
+@Fabricius2020{]}.
+
+Consequently, older age and being a women can make trauma patients more
+vulnerable to poorer post-discharge QOL {[}@Gopinath2017;@Brown2017c;
+@Mollayeva2018;@Rissanen2020{]}. There is some evidence that older women
+may have higher morbidity in LMIC settings {[}@Carmel2019;
+@Agrawal2014{]}, but there is little research on the interaction between
+age and gender on QOL among post-discharge trauma patients in this
+setting.
+
+Understanding the interaction between age and gender on QOL may provide
+insights for improving trauma management and developing support services
+in LMIC settings {[}@Meara2015; @Babhulkar2019{]}. The aim of this study
+is to assess the interaction of age and gender with post-discharge QOL
+among adult trauma patients using the context of urban India.
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+\hypertarget{study-design}{%
+\subsection{Study Design}\label{study-design}}
+
+This study is a cross-sectional study using data from an ongoing
+interrupted time series trial of trauma patients discharged from four
+tertiary-care hospital in urban India between November 2019 and May
+2021.
+
+\hypertarget{setting}{%
+\subsection{Setting}\label{setting}}
+
+India accounts for nearly 20\% of global trauma burden
+{[}@GBD2019DemographicsCollaborators2020{]}. More than one-tenth of all
+the DALYs in India are due to trauma and it is among the top five causes
+of morbidity {[}@Menon2019{]}. The patients were enrolled from the
+on-going Trauma Audit Filters Trial (TAFT) in four participating
+tertiary-care hospitals in Indian cities {[}@ClinicalTrials.gov2017{]}.
+These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy
+Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College
+(MAMC) in Delhi, the Institute of Post-Graduate Medical Education and
+Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata
+and St.~John's Medical College, Bengaluru. The first three are public
+hospitals that have nominal fees catering to patients from lower
+socioeconomic sections of the population, while the fourth is a
+charitable private hospital catering to a mix of different socioeconomic
+sections of the population.
+
+\hypertarget{participants}{%
+\subsection{Participants}\label{participants}}
+
+We include patients aged 18, which is the legal age for consent in in
+India {[}@IndianCouncilofMedicalResearch2006{]}, presenting to the
+casualty department with a history of trauma---as per the V01-Y36,
+chapter XX of the International Classification of Disease version 10
+(ICD-10) {[}@WordHealthOrganization2016{]}--who are admitted and
+discharged alive.
+
+\hypertarget{variables}{%
+\subsection{Variables}\label{variables}}
+
+Age and gender were the main variables for this study. We also included
+vital sign measures such as systolic blood pressure (SBP), respiratory
+rate (RR), heart rate (HR), oxygen saturation (SPO), Injury severity
+scores (ISS) and Glasgow Coma Scale (GCS) and injury etiology measures
+like mode of transport to hospital, type of injury, mechanism of injury,
+and length of hospital stay.
+
+\hypertarget{outcomes}{%
+\subsection{Outcomes}\label{outcomes}}
+
+Health-related quality-of-life outcome was measured using the EQ-5D Tool
+{[}@EuroQolGroup{]}. EQ-5D is a standardized measure of quality of life
+using five dimensions: mobility, self-care, usual activities,
+pain/discomfort, and anxiety/depression. Each dimension in the tool has
+three levels: no problems, some problems, and extreme problems.
+Additionally there is a visual analog scale (VAS) The patients were
+followed up at 3-months. EQ-5D tool can be administered over the
+telephone and has translations available in multiple Indian languages
+{[}@EuroQolGroup{]}
+
+Table 1: Description of study variables and outcomes
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.32}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.65}}@{}}
+\toprule
+\endhead
+Name & Description \\
+Age & Patient's age rounded up to closest whole year \\
+Sex & Patient's sex:
+
+Female
+
+Male \\
+Vital Signs & Systolic blood pressure (SBP), respiratory rate (RR),
+heart rate (HR), oxygen saturation (SPO), and Glasgow Coma Scale
+(GCS) \\
+Injury Etiology & Mode of transport, type of injury, mechanism of
+injury \\
+Injury Severity & Injury Severity Score \\
+Outcomes & \\
+Quality of Life & The participant's reply to the EQ-5D questionnaire and
+VAS on health state at 3 months after arrival at the study site. \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{data-source}{%
+\subsection{Data Source}\label{data-source}}
+
+Data was collected by one dedicated independent project officer in each
+of the hospitals who prospectively gather data on a standardized intake
+form for eight hours per day, five days a week, by directly observing
+the staff delivering trauma care. Vital signs such as systolic blood
+pressure, heart-rate, and oxygen saturation was recorded by the project
+officer independently. The project officer was rotated daily through
+each eight-hour shift in the morning, evening and night. Data for the
+variables was collected from patient records, or from the patient or
+patient representatives when they are at the hospital. Additionally, the
+project officer followed the patient or the patient relatives at
+3-months after discharge by telephone the for information on the
+outcomes and any missed variables.
+
+\hypertarget{bias}{%
+\subsection{Bias}\label{bias}}
+
+There could be bias in collection of data and recording of vital signs
+used to calculate injury severity. Adequate training of the project
+officers, periodic quality control of the data with external project
+officers and weekly online review meetings was done to reduce this bias.
+
+\hypertarget{statistical-methods}{%
+\subsection{Statistical Methods}\label{statistical-methods}}
+
+Multivariable linear models was used to study the association of age and
+gender with the QOL estimating 95\% confidence intervals and denote
+associations with a p-value of less than 0.05 as statistically
+significant {[}@Carey2013{]}. The statistical software R was used for
+all statistical analyses {[}@RCoreTeam2015{]}.
+
+\hypertarget{study-size}{%
+\subsection{Study Size}\label{study-size}}
+
+Simulation studies indicate that as many as 25 events, observations with
+the outcome, and non-events or more per free parameter are required to
+obtain stable estimates for logistic regression {[}@Courvoisier2011{]}.
+Given that our logistic regression model included around 18 free
+parameters, we need to include 375 events and at least as many
+non-events. .
+
+\hypertarget{ethics}{%
+\subsection{Ethics}\label{ethics}}
+
+Ethical clearance for the data collection was obtained from the four
+participating hospitals as amendments to the existing ethical clearance
+for the on-going TAFT project (Grant Medical College \& Sir J.J., Group
+of Hospitals, Mumbai---No.~IEC/Pharm/CT/111/A/2017, Dated 22nd August
+2017; Institute of Post-Graduate Medical Education, Kolkata---Memo
+No.~IPGME\&R/IEC/2017/396, Dated 21st August 2017; Maulana Azad Medical
+College, New Delhi-F.1/IEC/MAMC/(53/2/2016/No.97), Dated 3rd August
+2016; St.~John's Medical College, Bengaluru---No.~IEC/1/671/2017, Dated
+24th August, 2017). Waiver of informed consent was granted for
+collection of clinical data which was routinely collected for the
+patients, as they were all admitted after trauma, often arriving in an
+altered level of consciousness and in severe physical and psychological
+distress. The amendment granted permission to collect the additional
+data necessary for this study (Grant Medical College \& Sir J.J., Group
+of Hospitals, Mumbai---No.~IEC/Pharm/CT/2059/2019, Dated 16th September
+2019; St.~John's Medical College, Bengaluru---No.~IEC/1/530/2019, Dated
+25th June, 2019).
+
+\hypertarget{data-management}{%
+\subsection{Data management}\label{data-management}}
+
+Each center was assigned a center identification number and each patient
+a locally unique study identification number. Project officers first
+entered data on paper without any personal identification data. The
+project officers then transferred this data to an electronic format
+using a dedicated data entry application. The electronic data did not
+include any direct identifiers such as name, hospital record number, and
+telephone numbers. The only way to link an electronic record to a paper
+intake form was by combining the record's hospital and study
+identification numbers. Paper forms were kept locally at each center for
+the duration required by locally applicable laws and regulations, or at
+least five years, whichever is longest. The adequacy of their storage
+was the responsibility of the principal investigator at each center.
+Care was taken taken to ensure that at no time where they stored with
+less than reasonable care.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{Sample characteristics}\tabularnewline
+\toprule
+& 5 & 14 & 42 \\
+\midrule
+\endfirsthead
+\toprule
+& 5 & 14 & 42 \\
+\midrule
+\endhead
+3 & Age in years (median {[}IQR{]}) & & 36.0 {[}26.0, 50.0{]} \\
+4 & Sex (\%) & Female & 482 (19.9) \\
+5 & & Male & 1937 (80.1) \\
+6 & Mechanism of injury (\%) & Animal bites & 16 (0.7) \\
+7 & & Assault & 149 (6.1) \\
+8 & & Falls & 563 (23.2) \\
+9 & & Other & 287 (11.8) \\
+10 & & Railway injuries & 43 (1.8) \\
+11 & & Road traffic injuries & 1369 (56.4) \\
+12 & Type of injury (\%) & Blunt & 2372 (98.1) \\
+13 & & Penetrating & 45 (1.9) \\
+14 & Mode of transport (\%) & Ambulance & 1670 (69.1) \\
+15 & & Police van & 119 (4.9) \\
+16 & & Private Vehicles & 620 (25.6) \\
+17 & & On Foot & 9 (0.4) \\
+18 & Transferred (\%) & Direct Admissions & 527 (21.8) \\
+19 & & Transferred & 1890 (78.2) \\
+20 & SBP (median {[}IQR{]}) & & 118.0 {[}110.0, 130.0{]} \\
+21 & RR (median {[}IQR{]}) & & 21.0 {[}18.0, 22.0{]} \\
+22 & HR (median {[}IQR{]}) & & 84.0 {[}78.0, 93.0{]} \\
+23 & SpO2 (median {[}IQR{]}) & & 98.0 {[}97.0, 98.0{]} \\
+24 & GCS (median {[}IQR{]}) & & 15.0 {[}12.0, 15.0{]} \\
+25 & EQ5D Health Status (median {[}IQR{]}) & & 80.0 {[}65.0, 90.0{]} \\
+26 & EQ5D Mobility (\%) & No Problems & 360 (54.8) \\
+27 & & Some Problems & 216 (32.9) \\
+28 & & Confined to bed & 81 (12.3) \\
+29 & EQ5D Self Care (\%) & No Problems & 415 (63.2) \\
+30 & & Some Problems & 182 (27.7) \\
+31 & & Unable to wash or dress & 60 (9.1) \\
+32 & EQ5D Usual Activities (\%) & No Problems & 283 (43.0) \\
+33 & & Some Problems & 245 (37.2) \\
+34 & & Unable to perform usual activities & 130 (19.8) \\
+35 & EQ5D Pain/Discomfort (\%) & No Pain & 228 (34.7) \\
+36 & & Moderate Pain & 401 (60.9) \\
+37 & & Extreme Pain & 29 (4.4) \\
+38 & EQ5D Anxiety/Depression (\%) & No Anxious/depressed & 385 (58.9) \\
+39 & & Moderately Anxious/depressed & 200 (30.6) \\
+40 & & Extremely Anxious/depressed & 69 (10.6) \\
+41 & 30 day mortality (\%) & Alive & 1196 (74.7) \\
+42 & & Dead & 406 (25.3) \\
+\bottomrule
+\end{longtable}
+
+Out of a total of 2427 trauma patients enrolled, 1796 were excluded for
+missing data. The final cohort of 631 included in this study had a
+median age of 36 years (IQR: 26-50) with 80.07 per cent of patients were
+male. The most common mechanisms of injury were Road traffic injuries (
+per cent). Majority of the injuries were blunt (98.14 per cent) and 78.2
+per cent were transferred to the study hospitals. The all cause 30-day
+mortality was 16.73 per cent. The median severity score was x. Details
+of the study population is given in Table 2.
+
+\hypertarget{eq-5d-scores}{%
+\subsection{EQ-5D Scores}\label{eq-5d-scores}}
+
+652 completed the EQ-5D questionnaire at 3 months after discharge. The
+mean EQ5D index score was 76 (SD = 20.5). Three months after discharge,
+young males (18-32 years) had the highest score while middle-aged
+females reported the lowest score. Just over half the patients (54.8\%)
+reported no problems with mobility while two-thirds reported no problems
+with self-care. While less than half the patients (43.0\%) could carry
+on usual activities without any problems and only one-third of the
+patients (34.7\%) reported no pain or discomfort after three-months of
+post-discharge. Around 40\% of the patients reported experiencing some
+form of anxiety or depression. Again, the proportion of young males
+reporting any problems across all the five domains was the lowest while
+the proportion middle-aged females reported experiencing the problems
+across all the five domains was the highest. The overall EQ-5D scores
+are provided in Table 3.
+
+\hypertarget{eq-5d-in-relation-to-gender-and-age}{%
+\subsection{EQ-5D in relation to gender and
+age}\label{eq-5d-in-relation-to-gender-and-age}}
+
+Overall females had a slightly higher mean EQ5D index score (77.6027397)
+than males (76.5790514). On running a linear regression of index scores
+across sex across age after adjusting for injury etiology, vitals, and
+severity, young males aged (aged 18-32) performed better than
+middle-aged (aged 33-49) and old (aged 50 and above) males. On the other
+hand, old females had higher scores than young and middle aged females.
+Middle-age group had the lowest performance, with middle-aged faring the
+worst (Fig 1).
+
+Regression analysis in the mobility dimension keeping young males as the
+reference group, shows that the adjusted odds of reporting mobility
+problems was 1.0557517 in young females (aged 18-32), 1.0400443
+middle-aged females (aged 33-49), and 1.0430457 old females (aged 50 and
+above). In middle-aged males (aged 33-49) the odds were 1.4203472 and in
+old males (aged 50 and above) the odds were 1.0578552. Thus, all groups
+had higher odds of reporting some mobility problems than young males.
+
+Assessing the regression analysis in the self-care dimension, showed the
+adjusted odds of reporting problems performing self-care tasks was
+1.3238941 in young females, 1.1692589 in middle-aged females, and
+0.7880519 old females compared to young males. On the other hand, the
+odds of reporting these problems in middle-aged males was 1.3303163 and
+in old males it was 1.0728229times than young males. Only old females
+had lower odds of reporting problems with self-care than young males.
+
+In the dimension of being able to perform usual activities, regression
+analysis indicated that the adjusted odds of reporting any problems in
+performing was 1.3246203 in young females, 0.798196 in middle aged
+females, and 0.8050678 old females with respect to young males. The odds
+of reporting these problems were 1.6970086 in middle aged males and
+1.2401893 times in in old males. Thus, middle-aged and old females had
+lower odds of having problems performing usual activities than young
+males.
+
+The adjusted odds of reporting any form of pain and discomfort were
+1.7825876 in young females, 0.5814462 in middle-aged females, and
+0.6054132 old females compared to young males. Among middle aged and old
+males these odds were 2.1505875 and 1.9242736 respectively. Thus, middle
+aged and old females had lower odds of reporting pain than young males.
+
+In the anxiety and depression dimension, keeping young males as the
+reference group, the adjusted odds of reporting any form of anxiety or
+depression were 1.3986886 in young females, 0.4864969 middle-aged
+females, and 1.1036321 old females. In middle-aged males the odds was
+1.5951319 and in old males the odds was 0.8453032. So, younger and
+middle-aged females had lower odds of reporting having any form of
+anxiety and depression than young males.
+
+Though most of the odds of reporting any problems across the EQ5D
+domains were not statistically significant, middle aged males reported
+significant problems with pain and usual activity while old males
+reported significant problems with pain and anxiety (Table 4). The
+interaction of age and gender on the index EQ5D score and across its 5
+domains was found to be not statistically significant.
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+This study examined the interaction of age and gender on QOL in trauma
+patients discharged from four tertiary-care hospital in urban India at
+3-months after discharge. We did not find statistically significant
+differences across all age groups and gender as well as no interaction
+effect between age and gender in this population. The sub-group analysis
+showed differences in QOL between these groups. In each of the five EQ5D
+domains, odds of reporting problems varied between the groups. We found
+middle aged men report significantly lower QOL scores and was due to
+having higher odds of reporting problems in mobility, anxiety or
+depression, and especially pain, and usual activities.
+
+The mean EQ5D index score of 76 of trauma patients in this study is
+lower than the general population norm for South Asia of 85
+{[}@Kularatna2014{]}. This indicates that even after 3-months since
+discharge, trauma patients in urban India had not yet reached the
+pre-injury norm of QOL for the region. More services to address their
+needs.
+
+In this study middle-aged cohort, especially women, seem to be having
+the odds for the poorest QOL outcomes.
+
+Pain and discomfort was the domain that reported the highest proportion
+of reporting problems followed by usual activities.
+
+However, middle-aged and older women had the lowest odds of reporting
+problems in pain and usual activities than other groups. Could be due to
+the social structure where men and younger women going to formal
+employment, which is deemed in higher value than domestic chores, that
+women engage in. Pain reporting tends to be lower in women again due
+social factors. Similarly women reported lowest odds of anxiety and
+depression again could be due to social factors
+
+Young men had highest odds of reporting problems with mobility than
+other groups could be due to the group having more access to move/travel
+than other age groups.
+
+\textless!--Just wondering why having a higher proportion of those
+reporting any problem does not translate to higher odds of having that
+problem. For e.g.Middle-aged women report the highest proportion of any
+pain but have the lowest odds of reporting any pain than young
+men.--!\textgreater{}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\end{document}
