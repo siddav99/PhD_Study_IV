@@ -9,7 +9,6 @@ bibliography: bibliography.bib
 csl: bmcemerg.csl
 ---
 
-
 Introduction
 ============
 Trauma contributes to one-tenth of the global disability-adjusted life-years (DALYs), with low-and middle-income countries (LMICs) bearing a disproportionate burden of the morbidity  [@GBD2019DemographicsCollaborators2020; @Haagsma2019]. To address this burden it is important to understand the long-term outcomes of trauma and the different factors associated with these outcomes, especially in LMICs  [@Kruithof2017; @Wisborg2017; @Rios-Diaz2017]. This encompasses a range of socioeconomic outcomes including  health-related quality of life (QOL) [@Ahmed2017; @Nguyen2017; @Hossain2020; @Jagnoor2019]. 
@@ -30,6 +29,7 @@ This study is a cross-sectional study using data from an ongoing interrupted tim
 
 Setting
 -------
+
 India accounts for nearly 20% of global trauma burden [@GBD2019DemographicsCollaborators2020]. More than one-tenth of all the DALYs in India are due to trauma and it is among the top five causes of morbidity [@Menon2019]. The patients were enrolled from the on-going Trauma Audit Filters Trial (TAFT) in four participating tertiary-care hospitals in Indian cities [@ClinicalTrials.gov2017]. These were the Grant Medical College and Sir Jamshedjee Jeejeebhoy Hospital in Mumbai, Lok Nayak Hospital of Maulana Azad Medical College (MAMC) in Delhi, the Institute of Post-Graduate Medical Education and Research and Seth Sukhlal Karnani Memorial Hospital (SSKM) in Kolkata and St. John's Medical College, Bengaluru. The first three are public hospitals that have nominal fees catering to patients from lower socioeconomic sections of the population, while the fourth is a charitable private hospital catering to a mix of different socioeconomic sections of the population.
 
 Participants
@@ -39,10 +39,12 @@ We include patients aged 18, which is the legal age for consent in in India [@In
 
 Variables
 ---------
+
 Age and gender were the main  variables for this study. We also included vital sign measures such as systolic blood pressure (SBP), respiratory rate (RR), heart rate (HR), oxygen saturation (SPO), Injury severity scores (ISS) and Glasgow Coma Scale (GCS) and injury etiology measures like mode of transport to hospital, type of injury, mechanism of injury, and length of hospital stay.
 
 Outcomes
 --------
+
 Health-related quality-of-life outcome was measured using the EQ-5D Tool [@EuroQolGroup]. EQ-5D is a standardized measure of quality of life using five dimensions: mobility, self-care, usual activities, pain/discomfort, and anxiety/depression. Each dimension in the tool has three levels: no problems, some problems, and extreme problems. Additionally there is a visual analog scale (VAS) The patients were followed up at 3-months. EQ-5D tool can be administered over the telephone and has translations available in multiple Indian languages  [@EuroQolGroup]
 
 Table 1: Description of study variables and outcomes
@@ -90,12 +92,12 @@ There could be bias in collection of data and recording of vital signs used to c
 Statistical Methods
 -------------------
 
-Multivariable linear models was used to study the association of age and gender with the EQ-5D index score and multivariable logistic regression was used to measure the association with the different domains of EQ-5D which have multilevel responses. Estimating 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant [@Carey2013]. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
+Multivariable linear models was used to study the association of age and gender with the EQ-5D index score and multivariable logistic regression was used to measure the association with the different domains of EQ-5D which have multilevel responses. We estimated 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant [@Carey2013]. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
 
 Study Size
 ----------
 
-Previous studies indicate that as many as 25 events per variable is adequate to obtain stable estimates for linear regression [@Courvoisier2011; @Austin2015]. Given that our model includes around 18 free parameters, we need a minimum sample size of around 450 for the EQ-5D index score.  For multivariable logistic regression events per variable is ratio of the smallest number of observations in the multinomial outcome categories divided by the number of free parameters and should be at least 10 [@DeJong2019]. With 18 free parameters, requiring at least 180 events per category of the EQ5D domains, if there are inadequate samples, the categories would be combined as "Having no problems" and "Having any problems". 
+Previous studies indicate that as many as 25 events per variable is adequate to obtain stable estimates for linear<!-- Logistic?--> regression [@Courvoisier2011; @Austin2015]. Given that our model includes around 18 free parameters, we need a minimum sample size of around 450 for the EQ-5D index score<!-- You need to define what you mean by an event here, consider giving an example-->.  For multivariable<!-- Multinomial?--> logistic regression the events per variable is ratio of the smallest number of observations in the multinomial outcome categories divided by the number of free parameters and should be at least 10 [@DeJong2019]. With 18 free parameters, requiring at least 180 events per category of the EQ5D domains, if there are inadequate samples, the categories would be combined as "Having no problems" and "Having any problems"<!-- This sentence is too complicated for me. Do you mean that you did not have a big enough sample size to fulfil the criterion of a minimum of 10 EPVm? If so I suggest you start by explaining the sample size requirement of the multinomial logistic regression, then say that your sample size was not enough, and that you therefore dichotmoized your outcomes and used logistic regression sample size guidelines to estimate your sample size. You also need to say something about the sample size requirements of linear regression, see [@Austin2015] -->. 
 
 Ethics
 ------
@@ -105,7 +107,7 @@ Ethical clearance for the data collection was obtained from the four participati
 Data management
 ---------------
 
-Each center was assigned a center identification number and each patient a locally unique study identification number. Project officers first entered data on paper without any personal identification data. The project officers then transferred this data to an electronic format using a dedicated data entry application. The electronic data did not include any direct identifiers such as name, hospital record number, and telephone numbers. The only way to link an electronic record to a paper intake form was by combining the record's hospital and study identification numbers. Paper forms were kept locally at each center for the duration required by locally applicable laws and regulations, or at least five years, whichever is longest. The adequacy of their storage was the responsibility of the principal investigator at each center. Care was taken taken to ensure that at no time where they stored with less than reasonable care.
+Each center was assigned a center identification number and each patient a locally unique study identification number. Project officers first entered data on paper without any personal identification data<!-- The paper form includes information such as ward number, hospital record number, and phone numbers, so maybe that can be considered personal data?--> . The project officers then transferred this data to an electronic format using a dedicated data entry application. The electronic data did not include any direct identifiers such as name, hospital record number, and telephone numbers. The only way to link an electronic record to a paper intake form was by combining the record's hospital and study identification numbers. Paper forms were kept locally at each center for the duration required by locally applicable laws and regulations, or at least five years, whichever is longest. The adequacy of their storage was the responsibility of the principal investigator at each center. Care was taken taken to ensure that at no time where they stored with less than reasonable care.
 
 Results
 ========
@@ -549,13 +551,13 @@ jpeg("plot-2.Self-care.jpeg", quality = 100)
 emmip(sc.model4, sex2 ~ agegrp2, type = "response", CIs = TRUE)
 dev.off()
 
-##Usual activities
+## Usual activities
 
 ##Converting three category outcome to two
 final.dataset$eq5dua.new <- recode_factor(final.dataset$eq5dua, "Some Problems" = "Any problem", 
                                 "Unable to perform usual activities" = "Any problem")
 
-##Creating a model with age and gender
+## Creating a model with age and gender
 ua.model1 <- glm(eq5dua.new ~ age*sex, data = final.dataset, family = binomial)
 
 #Interaction term indicated by a * is equivalent to adding the lower order terms to the interaction term
@@ -569,7 +571,7 @@ exp(cbind(OR = coef(ua.model1), ua.model.ci))
 
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
 ua.model2 <- glm(eq5dua.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset, family = binomial)
-
+n
 
 summary(ua.model2)
 ua.model2.ci <- confint.default(ua.model2)
@@ -865,23 +867,25 @@ Out of a total of `r total.patients` trauma patients enrolled, `r missing.patien
 
 EQ-5D Scores
 ------------
-`r hs.complete` completed the EQ-5D questionnaire at 3 months after discharge. The mean EQ5D index score was 76 (SD = 20.5). Three months after discharge, young females (18-32 years) had the highest score while younger males reported the lowest score. Just over half the patients (54.8%) reported no problems with mobility while two-thirds reported no problems with self-care. While less than half the patients (43.0%) could carry on usual activities without any problems and only one-third of the patients (34.7%) reported no pain or discomfort after three-months of post-discharge. Around 40% of the patients reported experiencing some form of anxiety or depression. Again, the proportion of young males reporting any problems across all the five domains was the lowest while the proportion  middle-aged females reported experiencing the problems across all the five domains was the highest. The overall EQ-5D scores are provided in Table 3.
+`r hs.complete` completed the EQ-5D questionnaire at 3 months after discharge. The mean EQ5D index score was 76 (SD = 20.5)<!-- Use inline code for these figures-->. Three months after discharge, young females (18-32 years) had the highest score while younger males reported the lowest score. Just over half the patients (54.8%) reported no problems with mobility while two-thirds reported no problems with self-care. While less than half the patients (43.0%<!-- Same here -->) could carry on usual activities without any problems and only one-third of the patients (34.7%)<!-- And here--> reported no pain or discomfort after three-months of post-discharge. Around 40% of the patients reported experiencing some form of anxiety or depression. Again, the proportion of young males reporting any problems across all the five domains was the lowest while the proportion  middle-aged females reported experiencing the problems across all the five domains was the highest. The overall EQ-5D scores are provided in Table 3.
+
 
 EQ-5D in relation to gender and age
 -------------------------------
-Overall females had a slightly higher mean EQ5D index score (`r eq5dhs.fem`) than males (`r eq5dhs.mal`). On running a linear regression of index scores across sex across age after adjusting for injury etiology, vitals, and severity, young males aged (aged 18-32) performed better than middle-aged (aged 33-59)  and old  (aged 60 and above) males. On the other hand, old females had higher scores than young and middle aged females. Middle-age group had the lowest performance, with middle-aged faring the worst (Fig 1).
 
-Regression analysis in the mobility dimension keeping young males as the reference group, shows that the adjusted odds of reporting mobility problems was `r m.young.fem` in young females (aged 18-32), `r m.middle.fem` middle-aged females (aged 33-59), and `r m.old.fem` old females (aged 60 and above). In middle-aged males (aged 33-49) the odds were `r m.middle.mal` and in old males (aged 50 and above) the odds were `r m.old.mal`. Thus, all groups had higher odds of reporting some mobility problems than young males except middle-aged females. 
+Overall females had a slightly higher mean EQ5D index score (`r eq5dhs.fem`) than males (`r eq5dhs.mal`). On running a linear regression of index scores across sex across age after adjusting for injury etiology, vitals, and severity, young males aged (aged 18-32) performed better than middle-aged (aged 33-59)  and old (aged 60 and above) males. On the other hand, old females had higher scores than young and middle aged females. Middle-age group had the lowest performance, with middle-aged faring the worst (Fig 1).
 
-Assessing the regression analysis in the self-care dimension, showed the adjusted odds of reporting problems performing self-care tasks was `r sc.young.fem` in young females, `r sc.middle.fem` in middle-aged females, and `r sc.old.fem` old females compared to young males. On the other hand, the odds of reporting these problems in middle-aged males was `r sc.middle.mal` and in old males it was `r sc.old.mal`times than young males. Only middle aged and older females had higher odds of reporting problems with self-care than young males.
+Our logistic regression analysis in the mobility dimension keeping young males as the reference group, shows that the adjusted odds of reporting mobility problems was `r m.young.fem` in young females (aged 18-32), `r m.middle.fem` middle-aged females (aged 33-59), and `r m.old.fem` old females (aged 60 and above). In middle-aged males (aged 33-49) the odds were `r m.middle.mal` and in old males (aged 50 and above) the odds were `r m.old.mal`. Thus, all groups had higher odds of reporting some mobility problems than young males except middle-aged females. 
 
-In the dimension of being able to perform usual activities, regression analysis indicated that the adjusted odds of reporting any problems in performing was `r ua.young.fem` in young females, `r ua.middle.fem` in middle aged females, and `r ua.old.fem` old females with respect to young males. The odds of reporting these problems were `r ua.middle.mal` in middle aged males and  `r ua.old.mal` times in in old males. Thus, middle aged females had higher odds of having problems performing usual activities than young males.
+Assessing the logistic regression analysis in the self-care dimension, showed the adjusted odds of reporting problems performing self-care tasks was `r sc.young.fem` in young females, `r sc.middle.fem` in middle-aged females, and `r sc.old.fem` old females compared to young males. On the other hand, the odds of reporting these problems in middle-aged males was `r sc.middle.mal` and in old males it was `r sc.old.mal`times than young males. Only middle aged and older females had higher odds of reporting problems with self-care than young males.
+
+In the dimension of being able to perform usual activities, logistic regression analysis indicated that the adjusted odds of reporting any problems in performing was `r ua.young.fem` in young females, `r ua.middle.fem` in middle aged females, and `r ua.old.fem` old females with respect to young males. The odds of reporting these problems were `r ua.middle.mal` in middle aged males and  `r ua.old.mal` times in in old males. Thus, middle aged females had higher odds of having problems performing usual activities than young males.
 
 The adjusted odds of reporting any form of pain and discomfort were `r pd.young.fem` in young females, `r pd.middle.fem` in middle-aged females, and `r pd.old.fem` old females compared to young males. Among middle aged and old males these odds were `r pd.middle.mal` and  `r pd.old.mal` respectively. Thus, middle aged and old females had higher odds of reporting pain than young males. 
 
 In the anxiety and depression dimension, keeping young males as the reference group, the adjusted odds of reporting any form of anxiety or depression were `r ad.young.fem` in young females, `r ad.middle.fem` middle-aged females, and `r ad.old.fem` old females. In middle-aged males the odds was `r ad.middle.mal` and in old males the odds was `r ad.old.mal`. So, younger females and older males had higher  odds of reporting having any form of anxiety and depression than young males. 
 
-Though the odds of reporting any problems across the EQ5D domains were not statistically significant, middle aged females had the higher odds of reporting problems with across all domains except anxiety and depression (Table 4). The interaction of age and gender on the index EQ5D score and across its 5 domains was found to be not statistically significant.  
+Though the odds of reporting any problems across the EQ5D domains were not statistically significant, middle aged females had the higher odds of reporting problems with across all domains except anxiety and depression (Table 4). The interaction of age and gender on the index EQ5D score and across its 5 domains was found to be not statistically significant.
 
 Discussion
 ==========
