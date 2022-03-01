@@ -89,9 +89,7 @@ There could be bias in collection of data and recording of vital signs used to c
 
 Statistical Methods
 -------------------
-<!-- The subgroup analysis is not mentioned here 
-SD: Added age groups. -->
-In this study we divided study population into three groups: young adults-18-32 years, middle-aged adults-33-59 years, and old adults-60 years and above. We used multivariate linear regression to study the association of age and gender with the EQ-5D VAS score and multivariate ordinal logistic regression was used to measure the association with the different domains of EQ-5D which have multilevel responses. In order study the interaction between age and gender, we used the interaction term which was the product of age and gender (gender * age groups) [@Richardson2016] . In order to account for the effects of multicollinearity we calculated the variance inflation factor (VIF) and we centered those variables having a value above 5 were centered by subtracting the mean. The statistical software R was used for all statistical analyses We estimated 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant [@Carey2013]. The statistical software R was used for all statistical analyses [@RCoreTeam2015].<!-- How about standard logisitc regression. That's what you used for the dichotomized outcomes, right? SD: I thought I would mention it in the sample size section as there is where we say we would dichotomize the outcomes, if the sample size is inadequate.-->
+In this study we divided study population into three groups: young adults-18-32 years, middle-aged adults-33-59 years, and old adults-60 years and above. We used multivariate linear regression to study the association of age and gender with the EQ-5D VAS score and multivariate ordinal logistic regression was used to measure the association with the different domains of EQ-5D which have multilevel responses. In order study the interaction between age and gender, we used the interaction term which was the product of age and gender (gender * age groups) [@Richardson2016] . In order to account for the effects of multicollinearity we calculated the variance inflation factor (VIF) and we centered those variables having a value above 5 were centered by subtracting the mean. The statistical software R was used for all statistical analyses We estimated 95% confidence intervals and denote associations with a p-value of less than 0.05 as statistically significant [@Carey2013]. The statistical software R was used for all statistical analyses [@RCoreTeam2015].
 
 Study Size
 ----------
@@ -129,6 +127,7 @@ library(ordinal)
 library(scales)
 library(tinytex)
 library(rmarkdown)
+library(SuperLearner)
 
 ##Source functions
 source("R/import_data.R")
@@ -137,6 +136,10 @@ source("R/describe_missing_data.R")
 source("R/describe_data.R")
 source("R/finalize_dataset.R")
 source("R/create_sample_characteristics_table.R")
+source("R/calculate_rts.R")
+source("R/calculate_triss_score.R")
+source("R/create_prediction_dataset.R")
+source("R/prepare_SL_dataset.R")
 
 ## Import dataset (Using import_data function)
 dirty.data <- import_data("taft-dataset-collated-20200608232208.csv") 
@@ -148,14 +151,39 @@ clean.data <- clean_data(dirty.data)
 data.description <- describe_data(clean.data)
 
 ## Creating dataset with variables selected for this study
-final.dataset <- finalize_dataset(clean.data)
+study.dataset <- finalize_dataset(clean.data)
+
+##Removing missing
+final.dataset <- na.omit(study.dataset)
+
+##Adjusting for severity using Non-ISS model
+##Importing SL object
+non.iss.model <- readRDS("C:/Users/DELL/Documents/PhD-Study-III-/out//non-iss-model.Rds")
+
+##Create prediction dataset with variables same a  non-ISS model
+predict.dataset <- create_prediction_dataset(final.dataset)
+
+predict.dataset$sex <- as.numeric(predict.dataset$sex)
+predict.dataset$moi.grouped <- as.numeric(predict.dataset$moi.grouped)
+predict.dataset$tyi <- as.numeric(predict.dataset$tyi)
+predict.dataset$mot.grouped <- as.numeric(predict.dataset$mot.grouped)
+predict.dataset$tran <- as.numeric(predict.dataset$tran)
+
+
+##Using prepare_SL_data set function
+predict.dataset <- prepare_Sl_dataset(final.dataset)
+
+##Estimating probability of mortality
+probability <- predict(non.iss.model, predict.dataset)
+
+final.dataset$prob <- probability$pred
 
 ## Describing missing data (using describe_missing_data)
-descriptions <- describe_missing_data(final.dataset)
+descriptions <- describe_missing_data(study.dataset)
 
 
 ##Total patients
-total.patients <- nrow(clean.data)
+total.patients <- nrow(study.dataset)
 
 ##Missing data
 missing.patients <- descriptions[["total.incomplete"]][["n"]]
@@ -170,11 +198,27 @@ final.patients <- total.patients - missing.patients
 sample.charac <- create_sample_characteristics_table(final.dataset)
 
 ## Print table in manuscript
-kable(sample.charac$table, caption = sample.charac$caption, format = "pandoc")
+rownames(sample.charac$table) <- NULL
+formatted.table <- kable(sample.charac$table, caption = sample.charac$caption, format = "pandoc")
+write(paste0(paste0(formatted.table, collapse = "\n"), "\n\n", sample.charac$note),
+      "sample-characteristics-table.md")
+rmarkdown::render("sample-characteristics-table.md", output_format = "word_document")
 
 ```
 
 ```{r interaction, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+##Distribution of Age and gender
+final.dataset$agegrp <- cut(final.dataset$age, c(17,32,59,89), labels = c("18-32","33-59","60 and above"))
+distribution <- final.dataset %>% 
+  group_by(sex, agegrp) %>% 
+  summarize(n = n()) %>%  
+  ungroup()
+
+distribution.table <- kable(distribution, format = "pandoc") 
+write(distribution.table, "sample.distribution.md")
+rmarkdown::render("sample.distribution.md", output_format = "word_document")
+
+
 ## EQ-5D Index Score
 
 ##Complete patients
@@ -191,20 +235,17 @@ eq5dhs.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male"], na.rm = T)
 
 
 ##EQ5D Score by Age
-eq5dhs.young.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp2=="18-32"], na.rm = T)
+eq5dhs.young.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp=="18-32"])
 
-x <- summary(final.dataset$eq5dm.new[final.dataset$sex=="Female" & final.dataset$agegrp2=="18-32"])
+eq5dhs.middle.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp=="33-59"], na.rm = T)
 
+eq5dhs.old.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp=="60 and above"], na.rm = T)
 
-eq5dhs.middle.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp2=="33-59"], na.rm = T)
+eq5dhs.young.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp=="18-32"], na.rm = T)
 
-eq5dhs.old.fem <- mean(final.dataset$eq5dhs[final.dataset$sex=="Female" & final.dataset$agegrp2=="60 and above"], na.rm = T)
+eq5dhs.middle.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp=="33-59"], na.rm = T)
 
-eq5dhs.young.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp2=="18-32"], na.rm = T)
-
-eq5dhs.middle.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp2=="33-59"], na.rm = T)
-
-eq5dhs.old.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp2=="60 and above"], na.rm = T)
+eq5dhs.old.mal <- mean(final.dataset$eq5dhs[final.dataset$sex=="Male" & final.dataset$agegrp=="60 and above"], na.rm = T)
 
 ##Creating a model with age and gender
 model1 <- lm(eq5dhs ~ age*sex, data = final.dataset)
@@ -230,10 +271,10 @@ summary(cent.model1)
 vif(cent.model1)
 ##But all the VIFs are less than 5
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
+#Adjusting for severity using non-ISS Model probabilities)
 
 
-model2 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + centred.age*sex, data = final.dataset)
+model2 <- lm(eq5dhs ~ prob + centred.age*sex, data = final.dataset)
 
 summary(model2)
 
@@ -289,13 +330,17 @@ vif(model3)
 ##All values are less than 5
 
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-model4 <- lm(eq5dhs ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset)
+model4 <- lm(eq5dhs ~ prob + sex2*agegrp2, data = final.dataset)
 
 summary(model4)
 
 ##Calculating CI
 model4.ci <- confint.default(model4)
 hs <- cbind(coef(model4), model4.ci)
+
+hs.table <- kable(hs, format = "pandoc") 
+write(hs.table, "Health-status-metrics.md")
+rmarkdown::render("Health-status-metrics.md", output_format = "word_document")
 
 
 ##As before above, younger men aged (aged 18-25) had significantly higher QOL scores than the middle aged men (aged 33-45) (Estimate -4.56). Middle aged women (Estimate 2.27) had much better QOL scores than younger men, while younger women had marginally better QOL scores than younger men (Estimate 0.6). All other groups had lower scores than younger men. 
@@ -343,7 +388,7 @@ exp(cbind(OR = coef(m.model1), m.model.ci))
 ##For males the odds of having some mobility problems was 1.18 times that of females. For every one year increase in age the odds of some mobility problems increases by 0.98 times (i.e. decreases by 2%).The interaction factor reduces the odds of having some mobility problems by 1% [(1- 0.99*100)].
 
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-m.model2 <- glm(eq5dm.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset, family = binomial)
+m.model2 <- glm(eq5dm.new ~ prob + age*sex, data = final.dataset, family = binomial)
 
 
 summary(m.model2)
@@ -403,8 +448,10 @@ exp(cbind(OR = coef(m.model3), m.model3.ci))
 
 ## For younger females (18-32), middle aged females (33-59), older females (60 and above) the odds of having some mobility problems was 0.80, 1.31, and 0.77 times that of younger males (18-32). The odds of middle aged males (33-59) and older males (50 and above) having some mobility problems was 0.70 and 0.54 times than younger males
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-m.model4 <- glm(eq5dm.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset, family = binomial)
+#Adjusting for Mechanism of injury severity
+
+m.model4 <- glm(eq5dm.new ~ prob + sex2*agegrp2, data = final.dataset, family = binomial)
+summary(m.model4)
 
 m.coef <- coef(summary(m.model4))
 
@@ -417,6 +464,10 @@ m.model4.ci <- confint.default(m.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
 mobility.odds <- exp(cbind(OR = coef(m.model4), m.model4.ci))
+
+m.table <- kable(mobility.odds, format = "pandoc") 
+write(m.table, "Mobility-metrics.md")
+rmarkdown::render("Mobility-metrics.md", output_format = "word_document")
 
 ##OR
 m.young.fem <- mobility.odds["sex2Female", "OR"]
@@ -477,7 +528,7 @@ exp(cbind(OR = coef(sc.model1), sc.model.ci))
 ##For males the odds of having some self-care problems was 1.59 times that of females. For every one year increase in age the odds of some mobility problems increases by 1%.The interaction factor does not change the odds of having self-care [0.99].
 
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-sc.model2 <- glm(eq5dsc.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset, family = binomial)
+sc.model2 <- glm(eq5dsc.new ~ prob + age*sex, data = final.dataset, family = binomial)
 
 
 summary(sc.model2)
@@ -521,7 +572,7 @@ exp(cbind(OR = coef(sc.model3), sc.model3.ci))
 ## For younger females (18-32), middle aged females (33-59), older females (60 and above) the odds of having some problems performing self-care were 0.75, 1.05, and 0.95 times that of younger males (18-32). The odds of middle aged males (33-59) and older males (60 and above) having some problems performing self-care was 0.73 and 0.52 times than younger males. 
 
 #Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-sc.model4 <- glm(eq5dsc.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset, family = binomial)
+sc.model4 <- glm(eq5dsc.new ~ prob + sex2*agegrp2, data = final.dataset, family = binomial)
 
 summary(sc.model4)
 sc.coef <- coef(summary(sc.model4))
@@ -536,6 +587,11 @@ sc.model4.ci <- confint.default(sc.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
 sc.odds <- exp(cbind(OR = coef(sc.model4), sc.model4.ci)) 
+
+sc.table <- kable(sc.odds, format = "pandoc") 
+write(sc.table, "Self-care-metrics.md")
+rmarkdown::render("Self-care-metrics.md", output_format = "word_document")
+
 
 ##OR
 sc.young.fem <- sc.odds["sex2Female", "OR"]
@@ -579,9 +635,9 @@ exp(cbind(OR = coef(ua.model1), ua.model.ci))
 
 ##For males the odds of having some problems in performing usual activities was 1.4 times that of females. For every one year increase in age the odds of some mobility problems increases by 1%.The interaction factor does not affect the odds of having self-care [0.99].
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-ua.model2 <- glm(eq5dua.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset, family = binomial)
-n
+#Adjusting for injury severity)
+ua.model2 <- glm(eq5dua.new ~ prob + age*sex, data = final.dataset, family = binomial)
+
 
 summary(ua.model2)
 ua.model2.ci <- confint.default(ua.model2)
@@ -623,8 +679,8 @@ exp(cbind(OR = coef(ua.model3), ua.model3.ci))
 
 ## For younger females (18-32), middle aged females (33-59), older females (60 and above) the odds of having some problems performing usual activities were 0.70, 1.31, and 0.86 times that of younger males (18-32). The odds of middle aged males (33-59) and older males (60 and above) having some problems performing self-care was 0.69 and 0.61 times than younger males. 
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-ua.model4 <- glm(eq5dua.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset, family = binomial)
+#Adjusting for injury severity)
+ua.model4 <- glm(eq5dua.new ~ prob + sex2*agegrp2, data = final.dataset, family = binomial)
 
 summary(ua.model4)
 ua.coef <- coef(summary(ua.model4))
@@ -644,6 +700,10 @@ ua.model4.ci <- confint.default(ua.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
 ua.odds <- exp(cbind(OR = coef(ua.model4), ua.model4.ci)) 
+
+ua.table <- kable(ua.odds, format = "pandoc") 
+write(ua.table, "Usual-activities-metrics.md")
+rmarkdown::render("Usual-activities-metrics.md", output_format = "word_document")
 
 ##OR
 ua.young.fem <- ua.odds["sex2Female", "OR"]
@@ -682,8 +742,8 @@ exp(cbind(OR = coef(pd.model1), pd.model.ci))
 
 ##For males the odds of having any form of pain or discomfort was 3 times that of females. For every one year increase in age the odds of any pain or discomfort increases by 1%.The interaction factor reduces the odds of  affect the odds of pain or discomfort by 1%.
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-pd.model2 <- glm(eq5dpd.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset, family = binomial)
+#Adjusting for injury severity)
+pd.model2 <- glm(eq5dpd.new ~ prob + age*sex, data = final.dataset, family = binomial)
 
 summary(pd.model2)
 pd.model2.ci <- confint.default(pd.model2)
@@ -725,8 +785,8 @@ exp(cbind(OR = coef(pd.model3), pd.model3.ci))
 
 ## For younger females (18-32), middle aged females (33-59), older females (60 and above) the odds of having some pain or discomfort were 0.57, 1.25, and 3.37 times that of younger males (18-32). The odds of middle aged males (33-59) and older males (60 and above) having any pain was 0.57 and 0.54 times than younger males. 
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-pd.model4 <- glm(eq5dpd.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset, family = binomial)
+#Adjusting for injury severity
+pd.model4 <- glm(eq5dpd.new ~ prob + sex2*agegrp2, data = final.dataset, family = binomial)
 
 summary(pd.model4)
 
@@ -741,6 +801,10 @@ pd.model4.ci <- confint.default(pd.model4)
 
 ##As the estimates are ordered log odds converting them to odds ratios
 pd.odds <- exp(cbind(OR = coef(pd.model4), pd.model4.ci)) 
+
+pd.table <- kable(pd.odds, format = "pandoc") 
+write(pd.table, "Pain-metrics.md")
+rmarkdown::render("Pain-metrics.md", output_format = "word_document")
 
 ##OR
 pd.young.fem <- pd.odds["sex2Female", "OR"]
@@ -783,8 +847,8 @@ exp(cbind(OR = coef(ad.model1), ad.model.ci))
 
 ##For males the odds of having any form of anxiety and depression  was 1.49 times that of females. For every one year increase in age the odds of any anxiety and depression increases by 1%.The interaction factor does not seem to affect odds of anxiety or depression [0.99].
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-ad.model2 <- glm(eq5dad.new ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + age*sex, data = final.dataset, family = binomial)
+#Adjusting for injury severity
+ad.model2 <- glm(eq5dad.new ~ prob + age*sex, data = final.dataset, family = binomial)
 
 summary(ad.model2)
 ad.model2.ci <- confint.default(ad.model2)
@@ -834,8 +898,8 @@ ad.odds <-exp(cbind(OR = coef(ad.model3), ad.model3.ci))
 
 ## For younger females (18-32), middle aged females (33-59), older females (60 and above) the odds of having any anxiety and depression were 0.62, 1.8, and 1.21 times that of younger males (18-32). The odds of middle aged males (33-59) and older males (60 and above) having any anxiety and depression was 0.66 and 0.60 times than younger males. 
 
-#Adjusting for Mechanism of injury, Mode of transport, Transfer status, type of injury, GCS, Respirator Rate, systolic blood pressure, heart rate, oxygen saturation)
-ad.model4 <- glm(eq5dad ~ moi.grouped + mot.grouped + tran + tyi + gcs + rr + hr + sbp + hr + spo2 + sex2*agegrp2, data = final.dataset, family = binomial)
+#Adjusting for injury severity
+ad.model4 <- glm(eq5dad ~ prob + sex2*agegrp2, data = final.dataset, family = binomial)
 
 summary(ad.model4)
 ad.model4.ci <- confint.default(ad.model4)
@@ -847,7 +911,9 @@ contrast(ad.cat.values, "revpairwise", by="agegrp2",adjust="none")
 
 ##As the estimates are ordered log odds converting them to odds ratios
 ad.odds <- exp(cbind(OR = coef(ad.model4), ad.model4.ci)) 
-
+ad.table <- kable(ad.odds, format = "pandoc") 
+write(ad.table, "Anxiety-Depression-metrics.md")
+rmarkdown::render("Anxiety-Depression-metrics.md", output_format = "word_document")
 
 ##OR
 ad.young.fem <- ad.odds["sex2Female", "OR"]
